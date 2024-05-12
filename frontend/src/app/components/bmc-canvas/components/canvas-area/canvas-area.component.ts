@@ -11,4 +11,7 @@ import { CardModule } from 'primeng/card';
 export class CanvasAreaComponent {
   @Input()
   name: string = '';
+
+  @Input()
+  description: string = '';
 }

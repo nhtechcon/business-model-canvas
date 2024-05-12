@@ -1,2 +1,40 @@
 {
+    "canvas": {
+        "area-partners": {
+            "title": "Key Partners",
+            "description": "Who are our key partners? Who are our key suppliers? Which key resources are we acquiring from partners?"
+        },
+        "area-activities": {
+            "title": "Key Activities",
+            "description": "What key activities do our value propositions require? Our distribution channels? Customer relationships? Revenue streams?"
+        },
+        "area-resources": {
+            "title": "Key Resources",
+            "description": "What key resources do our value propositions require? Our distribution channels? Customer relationships? Revenue streams?"
+        },
+        "area-propositions": {
+            "title": "Value Propositions",
+            "description": "What value do we deliver to the customer? Which one of our customer’s problems are we helping to solve? What bundles of products and services are we offering to each Customer Segment?"
+        },
+        "area-relationships": {
+            "title": "Customer Relationships",
+            "description": "What type of relationship does each of our Customer Segments expect us to establish and maintain with them? Which ones have we established? How are they integrated with the rest of our business model?"
+        },
+        "area-channels": {
+            "title": "Channels",
+            "description": "Through which channels do our Customer Segments want to be reached? How are we reaching them now? How are our channels integrated? Which ones work best?"
+        },
+        "area-customersegments": {
+            "title": "Customer Segments",
+            "description": "For whom are we creating value? Who are our most important customers?"
+        },
+        "area-coststructure": {
+            "title": "Cost Structure",
+            "description": "What are the most important costs inherent in our business model? Which Key Resources are most expensive? Which Key Activities are most expensive?"
+        },
+        "area-revenuestreams": {
+            "title": "Revenue Streams",
+            "description": "For what value are our customers really willing to pay? For what do they currently pay? How are they currently paying? How would they prefer to pay?"
+        }
+    }
 }

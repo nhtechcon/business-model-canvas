@@ -5,4 +5,14 @@
 
     box-shadow: 0px 0px 0.5rem #c8c8c8;
     background: #fff;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.content-area {
+    flex: 1;
+    border: 2px dashed #d3d3d3;
+
+    cursor: copy;
 }

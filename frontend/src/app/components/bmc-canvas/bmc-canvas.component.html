@@ -1,28 +1,8 @@
 <div class="bmc-grid">
+
     <!-- Key Partners -->
-    <app-canvas-area class="area-partners" name="Key Partners"></app-canvas-area>
+    <app-canvas-area *ngFor="let areaKey of areas" [class]="areaKey"
+        name="{{ 'canvas.' + areaKey + '.title'  | translate }}"
+        description="{{ 'canvas.' + areaKey + '.description'  | translate }}"></app-canvas-area>
 
-    <!-- Key Activities -->
-    <app-canvas-area class="area-activites" name="Key Activities"></app-canvas-area>
-
-    <!-- Key Resources -->
-    <app-canvas-area class="area-resources" name="Key Resources"></app-canvas-area>
-
-    <!-- Value Propositions -->
-    <app-canvas-area class="area-propositions" name="Value Propositions"></app-canvas-area>
-
-    <!-- Customer Relationships -->
-    <app-canvas-area class="area-relationships" name="Customer Relationships"></app-canvas-area>
-
-    <!-- Channels -->
-    <app-canvas-area class="area-channels" name="Channels"></app-canvas-area>
-
-    <!-- Customer Segments -->
-    <app-canvas-area class="area-customersegments" name="Customer Segments"></app-canvas-area>
-
-    <!-- Cost Structure -->
-    <app-canvas-area class="area-coststructure" name="Cost Structure"></app-canvas-area>
-
-    <!-- Revenue Streams -->
-    <app-canvas-area class="area-revenuestreams" name="Revenue Streams"></app-canvas-area>
 </div>
