@@ -1,0 +1,27 @@
+.toolbar {
+  grid-area: toolbar;
+  margin-top: 0.5rem;
+  border-radius: 2rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.sidebar {
+  grid-area: sidebar;
+}
+
+.content {
+  grid-area: content;
+}
+
+.page-main {
+  display: grid;
+  gap: 0.5rem;
+
+  grid-template-columns: 1fr 16fr 1fr;
+  grid-template-areas:
+    ". toolbar ."
+    "sidebar content ."
+    "sidebar content ."
+    ". content .";
+}

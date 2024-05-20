@@ -10,9 +10,17 @@ import { AppComponent } from './app.component';
 import { PrimeNGComponentsModule } from './primeng-components.module';
 import { FormsModule } from '@angular/forms';
 import { BmcCanvasComponent } from './components/bmc-canvas/bmc-canvas.component';
+import { PageMainComponent } from './pages/page-main/page-main.component';
+import { ToolbarComponent } from './components/toolbar/toolbar.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [
+    AppComponent,
+    PageMainComponent,
+    ToolbarComponent,
+    SidebarComponent,
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
