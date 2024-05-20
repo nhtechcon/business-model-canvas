@@ -15,17 +15,21 @@
   flex-direction: column;
 }
 
-.horizontal {
-  &.area {
-    flex-direction: row;
-  }
+// Horizontal layout of areas only available on larger screens.
+// Smaller screens will always use vertical for the areas
+@media only screen and (min-width: 768px) {
+  .horizontal {
+    &.area {
+      flex-direction: row;
+    }
 
-  .content-area {
-    flex: 1;
-  }
+    .content-area {
+      flex: 1;
+    }
 
-  .area-header {
-    flex: 1;
+    .area-header {
+      flex: 1;
+    }
   }
 }
 
@@ -34,6 +38,8 @@
   border: 2px dashed #d3d3d3;
 
   cursor: copy;
+
+  min-height: 4rem;
 }
 
 .subtitle {
