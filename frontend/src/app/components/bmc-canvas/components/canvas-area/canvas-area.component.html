@@ -1,8 +1,10 @@
-<div class="area">
-    <h1>{{ name }}</h1>
-    <p class="subtitle">
-        {{ description }}
-    </p>
+<div class="area" [ngClass]="{'horizontal': isHorizontalLayout}">
+    <div class="area-header">
+        <h1>{{ name }}</h1>
+        <p class="subtitle" *ngIf="isInfoVisible">
+            {{ description }}
+        </p>
+    </div>
 
     <div class="content-area">
     </div>

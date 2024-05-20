@@ -10,6 +10,25 @@
   flex-direction: column;
 }
 
+.area-header {
+  display: flex;
+  flex-direction: column;
+}
+
+.horizontal {
+  &.area {
+    flex-direction: row;
+  }
+
+  .content-area {
+    flex: 1;
+  }
+
+  .area-header {
+    flex: 1;
+  }
+}
+
 .content-area {
   flex: 1;
   border: 2px dashed #d3d3d3;
