@@ -1,7 +1,9 @@
 <div class="bmc-grid">
-
-    <app-canvas-area *ngFor="let areaKey of areas" [class]="areaKey"
-        name="{{ 'canvas.' + areaKey + '.title'  | translate }}"
-        description="{{ 'canvas.' + areaKey + '.description'  | translate }}"></app-canvas-area>
-
+  <app-canvas-area
+    *ngFor="let areaKey of areas"
+    [class]="areaKey"
+    [entityId]="areaKey"
+    name="{{ 'canvas.' + areaKey + '.title' | translate }}"
+    description="{{ 'canvas.' + areaKey + '.description' | translate }}"
+  ></app-canvas-area>
 </div>

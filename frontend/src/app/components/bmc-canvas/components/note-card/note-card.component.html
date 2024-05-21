@@ -1,0 +1,11 @@
+<div
+  class="postit-wrapper"
+  pDraggable
+  (click)="$event.stopPropagation()"
+  (onDragStart)="dragStartHandler.emit(note)"
+  (onDragEnd)="dragEndHandler.emit(note)"
+>
+  <div class="post-it" contenteditable>
+    {{ note?.text }}
+  </div>
+</div>

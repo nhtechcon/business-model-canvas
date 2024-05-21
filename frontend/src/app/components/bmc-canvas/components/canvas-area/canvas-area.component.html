@@ -1,11 +1,12 @@
-<div class="area" [ngClass]="{'horizontal': isHorizontalLayout}">
-    <div class="area-header">
-        <h1>{{ name }}</h1>
-        <p class="subtitle" *ngIf="isInfoVisible">
-            {{ description }}
-        </p>
-    </div>
+<div class="area" [ngClass]="{ horizontal: isHorizontalLayout }">
+  <div class="area-header">
+    <h1>{{ name }}</h1>
+    <p class="subtitle" *ngIf="isInfoVisible">
+      {{ description }}
+    </p>
+  </div>
 
-    <div class="content-area">
-    </div>
+  <div class="content-area">
+    <app-canvas-area-content [entityId]="entityId"></app-canvas-area-content>
+  </div>
 </div>

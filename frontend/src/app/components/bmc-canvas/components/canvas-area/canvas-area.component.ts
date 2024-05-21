@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule } from "@angular/common";
 import {
   AfterViewInit,
   ChangeDetectorRef,
@@ -7,27 +7,31 @@ import {
   HostListener,
   Input,
   OnInit,
-} from '@angular/core';
-import { CardModule } from 'primeng/card';
+} from "@angular/core";
+import { CardModule } from "primeng/card";
 import {
   Breakpoint,
   BreakpointsService,
-} from 'src/app/core/services/breakpoints.service';
-import { GlobalUiStateService } from 'src/app/core/services/global-ui-state.service';
+} from "src/app/core/services/breakpoints.service";
+import { GlobalUiStateService } from "src/app/core/services/global-ui-state.service";
+import { CanvasAreaContentComponent } from "./canvas-area-content/canvas-area-content.component";
 
 @Component({
-  selector: 'app-canvas-area',
-  templateUrl: './canvas-area.component.html',
-  styleUrls: ['./canvas-area.component.scss'],
+  selector: "app-canvas-area",
+  templateUrl: "./canvas-area.component.html",
+  styleUrls: ["./canvas-area.component.scss"],
   standalone: true,
-  imports: [CommonModule, CardModule],
+  imports: [CommonModule, CardModule, CanvasAreaContentComponent],
 })
 export class CanvasAreaComponent implements AfterViewInit, OnInit {
   @Input()
-  name: string = '';
+  entityId!: string;
 
   @Input()
-  description: string = '';
+  name: string = "";
+
+  @Input()
+  description: string = "";
 
   protected isHorizontalLayout = false;
   protected isInfoVisible = false;
@@ -41,12 +45,12 @@ export class CanvasAreaComponent implements AfterViewInit, OnInit {
   ) {}
 
   ngOnInit() {
-    this.uiStateService.infoTextVisible$.subscribe((visible) => {
+    this.uiStateService.infoTextVisible$.subscribe(visible => {
       this.isInfoVisible = visible;
     });
 
     this.breakpointsService.breakpointChanges$.subscribe(
-      (breakpoint) => (this.breakpoint = breakpoint)
+      breakpoint => (this.breakpoint = breakpoint)
     );
   }
 
@@ -54,7 +58,7 @@ export class CanvasAreaComponent implements AfterViewInit, OnInit {
     this.updateLayout();
   }
 
-  @HostListener('window:resize', ['$event'])
+  @HostListener("window:resize", ["$event"])
   onResize(event: Event) {
     this.updateLayout();
   }

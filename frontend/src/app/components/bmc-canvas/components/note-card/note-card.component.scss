@@ -1,0 +1,17 @@
+.postit-wrapper {
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  margin: 20px;
+  cursor: default;
+}
+
+.post-it {
+  position: relative;
+  background: #ffa;
+  overflow: hidden;
+  padding: 20px;
+  font-family: sans-serif;
+  line-height: 1rem;
+  font-size: 0.75rem;
+
+  color: #130d6b;
+}
