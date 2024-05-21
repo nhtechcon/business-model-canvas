@@ -1,38 +1,38 @@
 {
     "canvas": {
-        "area-partners": {
+        "partners": {
             "title": "Partnerschaften",
             "description": "Liste der Schlüsselpartner und Lieferanten, die zur Erstellung und Lieferung des Produkts oder der Dienstleistung beitragen."
         },
-        "area-activities": {
+        "activities": {
             "title": "Schlüsselaktivitäten",
             "description": "Liste der wichtigsten Aktivitäten, die erforderlich sind, um das Geschäftsmodell umzusetzen."
         },
-        "area-resources": {
+        "resources": {
             "title": "Schlüsselressourcen",
             "description": "Liste der wichtigsten Ressourcen, die für den Betrieb des Geschäftsmodells erforderlich sind."
         },
-        "area-propositions": {
+        "propositions": {
             "title": "Wertangebot",
             "description": "Beschreibung der Produkte oder Dienstleistungen, die dem Kundenwert bieten und seine Probleme lösen."
         },
-        "area-relationships": {
+        "relationships": {
             "title": "Kundenbeziehungen",
             "description": "Beschreibung der Arten von Beziehungen, die das Unternehmen mit seinen verschiedenen Kundensegmenten pflegt."
         },
-        "area-channels": {
+        "channels": {
             "title": "Vertriebskanäle",
             "description": "Liste der Kanäle, über die Produkte oder Dienstleistungen an Kunden verkauft und geliefert werden."
         },
-        "area-customersegments": {
+        "customersegments": {
             "title": "Kundensegmente",
             "description": "Beschreibung der verschiedenen Gruppen von Personen oder Organisationen, an die das Unternehmen seine Produkte oder Dienstleistungen vermarktet."
         },
-        "area-coststructure": {
+        "coststructure": {
             "title": "Kostenstruktur",
             "description": "Liste der wichtigsten Kosten, die beim Betrieb des Geschäftsmodells anfallen."
         },
-        "area-revenuestreams": {
+        "revenuestreams": {
             "title": "Einnahmequellen",
             "description": "Liste der verschiedenen Quellen, aus denen das Unternehmen Einnahmen generiert."
         }
