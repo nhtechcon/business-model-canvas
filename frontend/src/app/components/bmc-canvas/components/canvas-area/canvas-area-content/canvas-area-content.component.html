@@ -1,6 +1,6 @@
 <div class="area-content" (click)="addNote()" pDroppable (onDrop)="drop($event)">
   <app-note-card
-    *ngFor="let note of notes"
+    *ngFor="let note of notes$ | async"
     [note]="note"
     (dragStartHandler)="dragStart($event)"
     (dragEndHandler)="dragEnd($event)"

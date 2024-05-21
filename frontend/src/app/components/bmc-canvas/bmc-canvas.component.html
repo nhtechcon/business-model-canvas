@@ -2,7 +2,7 @@
   <app-canvas-area
     *ngFor="let entityKey of entities"
     [class]="'area-' + (entityKey | lowercase)"
-    [entityId]="entityKey"
+    [entityId]="asEntity(entityKey)"
     name="{{ 'canvas.' + (entityKey | lowercase) + '.title' | translate }}"
     description="{{ 'canvas.' + (entityKey | lowercase) + '.description' | translate }}"
   ></app-canvas-area>

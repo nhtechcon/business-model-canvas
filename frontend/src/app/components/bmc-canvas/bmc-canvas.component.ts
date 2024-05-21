@@ -2,7 +2,7 @@ import { Component } from "@angular/core";
 import { CanvasAreaComponent } from "./components/canvas-area/canvas-area.component";
 import { CommonModule } from "@angular/common";
 import { TranslateModule } from "@ngx-translate/core";
-import { BmcEntity } from "src/app/core/models/bmc-entities.model";
+import { BmcEntity } from "src/app/core/models/bmc-entry.model";
 
 @Component({
   selector: "app-bmc-canvas",
@@ -13,4 +13,8 @@ import { BmcEntity } from "src/app/core/models/bmc-entities.model";
 })
 export class BmcCanvasComponent {
   protected entities = Object.keys(BmcEntity);
+
+  asEntity(key: string): BmcEntity {
+    return BmcEntity[key as keyof typeof BmcEntity];
+  }
 }

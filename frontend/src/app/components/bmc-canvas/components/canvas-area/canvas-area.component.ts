@@ -15,6 +15,7 @@ import {
 } from "src/app/core/services/breakpoints.service";
 import { GlobalUiStateService } from "src/app/core/services/global-ui-state.service";
 import { CanvasAreaContentComponent } from "./canvas-area-content/canvas-area-content.component";
+import { BmcEntity } from "src/app/core/models/bmc-entry.model";
 
 @Component({
   selector: "app-canvas-area",
@@ -25,7 +26,7 @@ import { CanvasAreaContentComponent } from "./canvas-area-content/canvas-area-co
 })
 export class CanvasAreaComponent implements AfterViewInit, OnInit {
   @Input()
-  entityId!: string;
+  entityId!: BmcEntity;
 
   @Input()
   name: string = "";
