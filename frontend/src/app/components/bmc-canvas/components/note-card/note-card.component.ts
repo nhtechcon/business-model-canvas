@@ -23,10 +23,20 @@ export class NoteCardComponent {
   @Output()
   dragEndHandler: EventEmitter<Note> = new EventEmitter();
 
+  @Output()
+  protected valueChanged: EventEmitter<string> = new EventEmitter();
+
+  textModel = "";
+
   constructor(private store: Store) {}
 
   protected onDeleteClick(event: Event) {
     event.stopImmediatePropagation();
     this.store.dispatch(deleteEntry({ id: this.note!.id }));
+  }
+
+  protected onContentChanged($event: any) {
+    this.textModel = $event.target.textContent;
+    this.valueChanged.emit(this.textModel);
   }
 }

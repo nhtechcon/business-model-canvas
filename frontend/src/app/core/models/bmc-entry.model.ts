@@ -21,5 +21,6 @@ export interface BmcEntry {
   id: string;
   text: string;
   date: Date;
+  lastUpdated: Date;
   entity: BmcEntity;
 }

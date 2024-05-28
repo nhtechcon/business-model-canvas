@@ -5,9 +5,12 @@
   (onDragStart)="dragStartHandler.emit(note)"
   (onDragEnd)="dragEndHandler.emit(note)"
 >
-  <div class="post-it" contenteditable>
-    {{ note?.text }}
-  </div>
+  <div
+    class="post-it"
+    contenteditable
+    [textContent]="textModel"
+    (input)="onContentChanged($event)"
+  ></div>
 
   <div class="action-buttons">
     <p-button

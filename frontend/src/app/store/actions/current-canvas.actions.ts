@@ -21,3 +21,8 @@ export const addEntry = createAction(
   "[current-canvas] addEntry",
   props<{ entry: BmcEntry }>()
 );
+
+export const updateEntryText = createAction(
+  "[current-canvas] updateEntryText",
+  props<{ id: string; text: string }>()
+);

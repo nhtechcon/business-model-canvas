@@ -8,7 +8,10 @@ import { BmcEntity, BmcEntry } from "src/app/core/models/bmc-entry.model";
 import { Store } from "@ngrx/store";
 import { selectEntityEntries } from "src/app/store/selectors/current-canvas.selectors";
 import { Observable, tap } from "rxjs";
-import { addEntry } from "src/app/store/actions/current-canvas.actions";
+import {
+  addEntry,
+  updateEntryText,
+} from "src/app/store/actions/current-canvas.actions";
 
 @Component({
   selector: "app-canvas-area-content",
@@ -33,12 +36,17 @@ export class CanvasAreaContentComponent implements AfterViewInit {
     this.notes$ = this.store.select(selectEntityEntries(this.entityId));
   }
 
+  trackNote(_: number, entry: BmcEntry) {
+    return entry.id;
+  }
+
   addNote() {
     this.store.dispatch(
       addEntry({
         entry: {
           id: uuidv4(),
           date: new Date(),
+          lastUpdated: new Date(),
           entity: this.entityId,
           text: "",
         },
@@ -56,5 +64,9 @@ export class CanvasAreaContentComponent implements AfterViewInit {
 
   dragEnd(note: Note) {
     this.draggedNote = null;
+  }
+
+  noteValueChanged(id: string, text: string) {
+    this.store.dispatch(updateEntryText({ id, text }));
   }
 }
