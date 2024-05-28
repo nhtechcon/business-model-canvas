@@ -8,4 +8,15 @@
   <div class="post-it" contenteditable>
     {{ note?.text }}
   </div>
+
+  <div class="action-buttons">
+    <p-button
+      icon="pi pi-trash"
+      [rounded]="true"
+      [text]="true"
+      size="small"
+      severity="contrast"
+      (onClick)="onDeleteClick($event)"
+    />
+  </div>
 </div>

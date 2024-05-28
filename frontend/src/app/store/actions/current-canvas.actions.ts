@@ -11,3 +11,13 @@ export const setCanvasName = createAction(
   "[current-canvas] setCanvasName",
   props<{ name: string }>()
 );
+
+export const deleteEntry = createAction(
+  "[current-canvas] deleteEntry",
+  props<{ id: string }>()
+);
+
+export const addEntry = createAction(
+  "[current-canvas] addEntry",
+  props<{ entry: BmcEntry }>()
+);

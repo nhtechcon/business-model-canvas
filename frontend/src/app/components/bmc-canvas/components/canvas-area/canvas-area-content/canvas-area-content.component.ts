@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, Input, inject } from "@angular/core";
 import { CommonModule } from "@angular/common";
+import { v4 as uuidv4 } from "uuid";
 import { NoteCardComponent } from "../../note-card/note-card.component";
 import { DragDropModule } from "primeng/dragdrop";
 import { Note } from "src/app/core/models/note.model";
@@ -7,7 +8,7 @@ import { BmcEntity, BmcEntry } from "src/app/core/models/bmc-entry.model";
 import { Store } from "@ngrx/store";
 import { selectEntityEntries } from "src/app/store/selectors/current-canvas.selectors";
 import { Observable, tap } from "rxjs";
-import { setCanvasData } from "src/app/store/actions/current-canvas.actions";
+import { addEntry } from "src/app/store/actions/current-canvas.actions";
 
 @Component({
   selector: "app-canvas-area-content",
@@ -34,28 +35,15 @@ export class CanvasAreaContentComponent implements AfterViewInit {
 
   addNote() {
     this.store.dispatch(
-      setCanvasData({
-        data: {
-          creationDate: new Date(),
-          lastEditDate: new Date(),
-          name: "asd",
-          entries: [
-            {
-              date: new Date(),
-              entity: this.entityId,
-              id: "",
-              text: "test",
-            },
-          ],
+      addEntry({
+        entry: {
+          id: uuidv4(),
+          date: new Date(),
+          entity: this.entityId,
+          text: "",
         },
       })
     );
-    // this.notes.push({
-    //   id: "",
-    //   text: "new",
-    //   date: new Date(),
-    //   entity: this.entityId,
-    // });
   }
 
   dragStart(note: Note) {

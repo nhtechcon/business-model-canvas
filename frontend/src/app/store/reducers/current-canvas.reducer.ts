@@ -29,5 +29,14 @@ export const currentCanvasReducer = createReducer(
   on(CurrentCanvasActions.setCanvasName, (state, { name }) => ({
     ...state,
     name,
-  }))
+  })),
+  on(CurrentCanvasActions.deleteEntry, (state, { id }) => ({
+    ...state,
+    entries: state.entries.filter(entry => entry.id !== id),
+  })),
+  on(CurrentCanvasActions.addEntry, (state, { entry }) => {
+    const newState = JSON.parse(JSON.stringify(state));
+    newState.entries.push(entry);
+    return newState;
+  })
 );
