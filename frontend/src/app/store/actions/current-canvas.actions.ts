@@ -6,3 +6,8 @@ export const setCanvasData = createAction(
   "[current-canvas] setCanvasData",
   props<{ data: CurrentCanvasState }>()
 );
+
+export const setCanvasName = createAction(
+  "[current-canvas] setCanvasName",
+  props<{ name: string }>()
+);

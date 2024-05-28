@@ -14,7 +14,7 @@ export interface CurrentCanvasState {
 }
 
 export const initialState: CurrentCanvasState = {
-  name: "",
+  name: "Unnamed Canvas",
   creationDate: new Date(),
   lastEditDate: new Date(),
 
@@ -25,5 +25,9 @@ export const currentCanvasReducer = createReducer(
   initialState,
   on(CurrentCanvasActions.setCanvasData, (state, { data }) =>
     JSON.parse(JSON.stringify(data))
-  )
+  ),
+  on(CurrentCanvasActions.setCanvasName, (state, { name }) => ({
+    ...state,
+    name,
+  }))
 );

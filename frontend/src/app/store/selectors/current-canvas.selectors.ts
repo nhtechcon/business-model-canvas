@@ -11,3 +11,8 @@ export const selectEntityEntries = (entity: BmcEntity) =>
   createSelector(selectCurrentCanvas, (state: CurrentCanvasState) =>
     state.entries.filter(entry => entry.entity === entity)
   );
+
+export const selectName = createSelector(
+  selectCurrentCanvas,
+  (state: CurrentCanvasState) => state.name
+);

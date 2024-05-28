@@ -1,16 +1,25 @@
 <div class="toolbar shadow-2">
-    <p-toolbar [style]="{ 'border-radius': '2rem' }">
-        <div class="p-toolbar-group-start">
-            <b class="font-bold">New Canvas</b>
-        </div>
-        <div class="p-toolbar-group-center">
-        </div>
-        <div class="p-toolbar-group-end">
-            <button
-                class="p-link inline-flex justify-content-center align-items-center h-3rem w-3rem border-circle hover:bg-white-alpha-10 transition-all transition-duration-200"
-                (click)="toggleInfoText()">
-                <i class="pi pi-question-circle text-2xl"></i>
-            </button>
-        </div>
-    </p-toolbar>
+  <p-toolbar [style]="{ 'border-radius': '2rem' }">
+    <div class="p-toolbar-group-start">
+      <!-- in-place editable name -->
+      <p-inplace closable="closable" closeIcon="pi-check" (onDeactivate)="onRename()">
+        <ng-template pTemplate="display">
+          <b class="font-bold">{{ name$ | async }}</b>
+          <i class="pi pi-pencil text-sm ml-2"></i>
+        </ng-template>
+        <ng-template pTemplate="content">
+          <input type="text" pInputText [(ngModel)]="enteredName" />
+        </ng-template>
+      </p-inplace>
+    </div>
+    <div class="p-toolbar-group-center"></div>
+    <div class="p-toolbar-group-end">
+      <button
+        class="p-link inline-flex justify-content-center align-items-center h-3rem w-3rem border-circle hover:bg-white-alpha-10 transition-all transition-duration-200"
+        (click)="toggleInfoText()"
+      >
+        <i class="pi pi-question-circle text-2xl"></i>
+      </button>
+    </div>
+  </p-toolbar>
 </div>
