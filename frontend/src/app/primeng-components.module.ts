@@ -9,6 +9,7 @@ import { InputGroupModule } from "primeng/inputgroup";
 import { InputGroupAddonModule } from "primeng/inputgroupaddon";
 import { PasswordModule } from "primeng/password";
 import { TooltipModule } from "primeng/tooltip";
+import { TableModule } from "primeng/table";
 
 /**
  * A module which imports all required primeng components.
@@ -25,6 +26,7 @@ import { TooltipModule } from "primeng/tooltip";
     InputGroupAddonModule,
     PasswordModule,
     TooltipModule,
+    TableModule,
   ],
   exports: [
     InputTextModule,
@@ -37,6 +39,7 @@ import { TooltipModule } from "primeng/tooltip";
     InputGroupAddonModule,
     PasswordModule,
     TooltipModule,
+    TableModule,
   ],
 })
 export class PrimeNGComponentsModule {}

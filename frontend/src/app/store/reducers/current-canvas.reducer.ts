@@ -1,17 +1,11 @@
 import { createReducer, on } from "@ngrx/store";
 import * as CurrentCanvasActions from "../actions/current-canvas.actions";
-import { BmcEntry } from "src/app/core/models/bmc-entry.model";
+import { BmcCanvas } from "src/app/core/models/bmc-canvas.model";
 
 /**
  * Describes the state of the currently loaded business model canvas.
  */
-export interface CurrentCanvasState {
-  name: string;
-  creationDate: Date;
-  lastEditDate: Date;
-
-  entries: BmcEntry[];
-}
+export interface CurrentCanvasState extends BmcCanvas {}
 
 export const initialState: CurrentCanvasState = {
   name: "Unnamed Canvas",

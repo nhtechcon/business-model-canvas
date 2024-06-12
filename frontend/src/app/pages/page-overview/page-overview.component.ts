@@ -1,4 +1,5 @@
 import { Component } from "@angular/core";
+import { BmcCanvas } from "src/app/core/models/bmc-canvas.model";
 
 @Component({
   selector: "app-page-overview",
@@ -6,5 +7,12 @@ import { Component } from "@angular/core";
   styleUrls: ["./page-overview.component.scss"],
 })
 export class PageOverviewComponent {
-  canvasList = [];
+  canvasList: BmcCanvas[] = [
+    {
+      creationDate: new Date(),
+      entries: [],
+      lastEditDate: new Date(),
+      name: "Sample Canvas",
+    },
+  ];
 }
