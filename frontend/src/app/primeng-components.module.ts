@@ -8,6 +8,7 @@ import { CardModule } from "primeng/card";
 import { InputGroupModule } from "primeng/inputgroup";
 import { InputGroupAddonModule } from "primeng/inputgroupaddon";
 import { PasswordModule } from "primeng/password";
+import { TooltipModule } from "primeng/tooltip";
 
 /**
  * A module which imports all required primeng components.
@@ -23,6 +24,7 @@ import { PasswordModule } from "primeng/password";
     InputGroupModule,
     InputGroupAddonModule,
     PasswordModule,
+    TooltipModule,
   ],
   exports: [
     InputTextModule,
@@ -34,6 +36,7 @@ import { PasswordModule } from "primeng/password";
     InputGroupModule,
     InputGroupAddonModule,
     PasswordModule,
+    TooltipModule,
   ],
 })
 export class PrimeNGComponentsModule {}
