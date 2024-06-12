@@ -4,6 +4,10 @@ import { ButtonModule } from "primeng/button";
 import { CalendarModule } from "primeng/calendar";
 import { ToolbarModule } from "primeng/toolbar";
 import { InplaceModule } from "primeng/inplace";
+import { CardModule } from "primeng/card";
+import { InputGroupModule } from "primeng/inputgroup";
+import { InputGroupAddonModule } from "primeng/inputgroupaddon";
+import { PasswordModule } from "primeng/password";
 
 /**
  * A module which imports all required primeng components.
@@ -15,6 +19,10 @@ import { InplaceModule } from "primeng/inplace";
     CalendarModule,
     ToolbarModule,
     InplaceModule,
+    CardModule,
+    InputGroupModule,
+    InputGroupAddonModule,
+    PasswordModule,
   ],
   exports: [
     InputTextModule,
@@ -22,6 +30,10 @@ import { InplaceModule } from "primeng/inplace";
     CalendarModule,
     ToolbarModule,
     InplaceModule,
+    CardModule,
+    InputGroupModule,
+    InputGroupAddonModule,
+    PasswordModule,
   ],
 })
 export class PrimeNGComponentsModule {}

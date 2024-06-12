@@ -1,0 +1,43 @@
+<div class="w-full sm:w-24rem mx-auto mt-8 text-center px-4 sm:px-0">
+  <i class="pi pi-objects-column text-3xl mb-6 text-orange-500"></i>
+
+  <form [formGroup]="loginForm" (ngSubmit)="login()" novalidate>
+    <p-card header="Business Model Canvas" class="w-full">
+      <!-- Username -->
+      <p-inputGroup>
+        <p-inputGroupAddon>
+          <i class="pi pi-user"></i>
+        </p-inputGroupAddon>
+        <input pInputText placeholder="Username" formControlName="username" />
+      </p-inputGroup>
+      <!-- Password -->
+      <p-inputGroup class="mt-2">
+        <p-inputGroupAddon><i class="pi pi-key"></i></p-inputGroupAddon>
+        <input
+          pInputText
+          placeholder="Password"
+          type="password"
+          formControlName="password"
+        />
+      </p-inputGroup>
+
+      <ng-template pTemplate="footer">
+        <div class="flex gap-3 mt-1">
+          <p-button
+            label="Clear"
+            severity="secondary"
+            class="w-full"
+            styleClass="w-full"
+          />
+          <p-button
+            label="Login"
+            class="w-full"
+            styleClass="w-full"
+            [disabled]="loginForm.invalid"
+            type="submit"
+          />
+        </div>
+      </ng-template>
+    </p-card>
+  </form>
+</div>
