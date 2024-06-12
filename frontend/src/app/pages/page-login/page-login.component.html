@@ -1,8 +1,10 @@
-<div class="w-full sm:w-24rem mx-auto mt-8 text-center px-4 sm:px-0">
+<div
+  class="w-full sm:w-24rem mx-auto mt-8 text-center flex flex-column align-items-center px-4 sm:px-0"
+>
   <app-logo></app-logo>
 
-  <form [formGroup]="loginForm" (ngSubmit)="login()" novalidate>
-    <p-card header="Business Model Canvas" class="w-full">
+  <form [formGroup]="loginForm" (ngSubmit)="login()" novalidate class="mt-6 w-full">
+    <p-card>
       <!-- Username -->
       <p-inputGroup>
         <p-inputGroupAddon>
