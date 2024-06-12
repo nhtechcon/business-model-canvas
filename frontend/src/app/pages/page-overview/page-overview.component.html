@@ -1,0 +1,21 @@
+<div class="page-overview">
+  <div class="mx-auto w-full sm:w-6 sm:pt-8">
+    <app-logo></app-logo>
+
+    <h2>Welcome!</h2>
+
+    <div *ngIf="false; else emptyNotice">
+      <p>Here is a list of your previously created canvas sheets:</p>
+    </div>
+  </div>
+</div>
+
+<ng-template #emptyNotice>
+  <p>Looks like you have not created any canvas yet. Let's get started!</p>
+  <p-button
+    label="Create a canvas"
+    icon="pi pi-plus"
+    severity="info"
+    routerLink="/main/canvas"
+  />
+</ng-template>

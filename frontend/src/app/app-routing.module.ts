@@ -2,6 +2,7 @@ import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { PageMainComponent } from "./pages/page-main/page-main.component";
 import { PageLoginComponent } from "./pages/page-login/page-login.component";
+import { PageOverviewComponent } from "./pages/page-overview/page-overview.component";
 
 const routes: Routes = [
   {
@@ -10,12 +11,26 @@ const routes: Routes = [
   },
   {
     path: "main",
-    component: PageMainComponent,
+    children: [
+      {
+        path: "overview",
+        component: PageOverviewComponent,
+      },
+      {
+        path: "canvas",
+        component: PageMainComponent,
+      },
+      {
+        path: "",
+        pathMatch: "full",
+        redirectTo: "overview",
+      },
+    ],
   },
   {
     path: "",
     pathMatch: "full",
-    redirectTo: "main",
+    redirectTo: "login",
   },
 ];
 

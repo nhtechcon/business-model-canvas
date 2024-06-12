@@ -17,12 +17,15 @@ import { StoreModule, provideStore } from "@ngrx/store";
 import { currentCanvasReducer } from "./store/reducers/current-canvas.reducer";
 import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 import { PageLoginComponent } from "./pages/page-login/page-login.component";
+import { PageOverviewComponent } from "./pages/page-overview/page-overview.component";
+import { LogoComponent } from "./components/logo/logo.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     PageMainComponent,
     PageLoginComponent,
+    PageOverviewComponent,
     ToolbarComponent,
     SidebarComponent,
     LogoComponent,
