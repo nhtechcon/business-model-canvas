@@ -25,6 +25,7 @@ import { PageLoginComponent } from "./pages/page-login/page-login.component";
     PageLoginComponent,
     ToolbarComponent,
     SidebarComponent,
+    LogoComponent,
   ],
   imports: [
     BrowserModule,
