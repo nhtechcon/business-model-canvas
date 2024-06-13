@@ -3,17 +3,15 @@ The api routes for user management
 """
 
 from fastapi import APIRouter, Depends, HTTPException, status
-from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from dependencies.db_session import get_db
-from models.api_models import Token, LoginRequest
+from dependencies.auth import get_current_user
+from models.api_models import Token, LoginRequest, User
 
 from service import auth
 
 router = APIRouter()
-
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
 
 @router.post("/login", response_model=Token)
@@ -42,11 +40,6 @@ async def get_users():
     return []
 
 
-@router.get("/users/me", tags=["users"])
-async def get_user_me():
-    return {}
-
-
-@router.get("/users/{username}", tags=["users"])
-async def get_user(username: str):
-    return {}
+@router.get("/users/me", response_model=User, tags=["users"])
+async def get_user_me(current_user: User = Depends(get_current_user)):
+    return current_user

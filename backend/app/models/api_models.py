@@ -21,9 +21,9 @@ class TokenData(BaseModel):
 
 class UserBase(BaseModel):
     username: str
+    first_name: str | None = None
+    last_name: str | None = None
     email: str | None = None
-    full_name: str | None = None
-    disabled: bool | None = None
 
 
 class UserCreate(UserBase):
