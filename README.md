@@ -6,4 +6,11 @@ Uses Angular and the PrimeNG component library for the frontend, and Python with
 
 ## How to build
 
+Backend:
+
+```bash
+docker build -t bmc-backend backend
+docker run -p 8080:8080 -it bmc-backend
+```
+
 ## How to run
