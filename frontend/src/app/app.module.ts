@@ -19,6 +19,7 @@ import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 import { PageLoginComponent } from "./pages/page-login/page-login.component";
 import { PageOverviewComponent } from "./pages/page-overview/page-overview.component";
 import { LogoComponent } from "./components/logo/logo.component";
+import { canvasListReducer } from "./store/reducers/canvas-list.reducer";
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { LogoComponent } from "./components/logo/logo.component";
     AppRoutingModule,
     BmcCanvasComponent,
     StoreModule.forRoot({
+      canvasList: canvasListReducer,
       currentCanvas: currentCanvasReducer,
     }),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),

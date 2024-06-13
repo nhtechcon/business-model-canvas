@@ -1,4 +1,5 @@
 import { createReducer, on } from "@ngrx/store";
+import { v4 as uuidv4 } from "uuid";
 import * as CurrentCanvasActions from "../actions/current-canvas.actions";
 import { BmcCanvas } from "src/app/core/models/bmc-canvas.model";
 
@@ -8,6 +9,7 @@ import { BmcCanvas } from "src/app/core/models/bmc-canvas.model";
 export interface CurrentCanvasState extends BmcCanvas {}
 
 export const initialState: CurrentCanvasState = {
+  id: uuidv4(),
   name: "Unnamed Canvas",
   creationDate: new Date(),
   lastEditDate: new Date(),
