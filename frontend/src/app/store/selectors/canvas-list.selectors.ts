@@ -1,8 +1,10 @@
 import { createSelector, createFeatureSelector } from "@ngrx/store";
 import { CanvasListState } from "../reducers/canvas-list.reducer";
 
+export const featureKey = "canvasList";
+
 export const selectCanvasListState =
-  createFeatureSelector<CanvasListState>("canvasList");
+  createFeatureSelector<CanvasListState>(featureKey);
 
 export const selectAllCanvases = createSelector(
   selectCanvasListState,
