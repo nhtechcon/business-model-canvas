@@ -1,5 +1,8 @@
 import { Component } from "@angular/core";
-import { BmcCanvas } from "src/app/core/models/bmc-canvas.model";
+import { Store } from "@ngrx/store";
+import { Observable } from "rxjs";
+import { BasicBmcCanvasInfo } from "src/app/core/models/bmc-canvas.model";
+import { selectAllCanvases } from "src/app/store/selectors/canvas-list.selectors";
 
 @Component({
   selector: "app-page-overview",
@@ -7,12 +10,9 @@ import { BmcCanvas } from "src/app/core/models/bmc-canvas.model";
   styleUrls: ["./page-overview.component.scss"],
 })
 export class PageOverviewComponent {
-  canvasList: BmcCanvas[] = [
-    {
-      creationDate: new Date(),
-      entries: [],
-      lastEditDate: new Date(),
-      name: "Sample Canvas",
-    },
-  ];
+  canvasList$: Observable<BasicBmcCanvasInfo[]>;
+
+  constructor(private store: Store) {
+    this.canvasList$ = this.store.select(selectAllCanvases);
+  }
 }
