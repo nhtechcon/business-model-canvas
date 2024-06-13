@@ -55,7 +55,12 @@ import { canvasListReducer } from "./store/reducers/canvas-list.reducer";
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
     ReactiveFormsModule,
   ],
-  providers: [provideStore({ currentCanvas: currentCanvasReducer })],
+  providers: [
+    provideStore({
+      currentCanvas: currentCanvasReducer,
+      canvasList: canvasListReducer,
+    }),
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
