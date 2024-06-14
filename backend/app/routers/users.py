@@ -54,7 +54,7 @@ async def register_user(
     if body.password1 != body.password2:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-            detail=UserErrorMessages.PASSWORDS_NO_MATCH.value,
+            detail=UserErrorMessages.PASSWORDS_NO_MATCH,
         )
 
     # Ensure username is available
@@ -64,7 +64,7 @@ async def register_user(
     if existing_username:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-            detail=UserErrorMessages.USERNAME_ALREADY_TAKEN.value,
+            detail=UserErrorMessages.USERNAME_ALREADY_TAKEN,
         )
 
     # Ensure email is not registered
@@ -72,7 +72,7 @@ async def register_user(
     if existing_email:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-            detail=UserErrorMessages.EMAIL_ALREADY_REGISTERED.value,
+            detail=UserErrorMessages.EMAIL_ALREADY_REGISTERED,
         )
 
     user = await auth.create_user(db_session, body)

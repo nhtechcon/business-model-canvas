@@ -2,9 +2,11 @@
 
 from contextlib import asynccontextmanager
 
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException, Request
+from fastapi.responses import JSONResponse
 
 from routers import users
+from models.errors import ErrorMessage
 from service.database_client import init_tables
 
 
@@ -16,6 +18,23 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(lifespan=lifespan)
+
+
+@app.exception_handler(HTTPException)
+async def custom_http_exception_handler(request: Request, exc: HTTPException):
+    """Custom exception handler to ensure that ErrorMessage is properly
+    handled."""
+
+    if isinstance(exc.detail, ErrorMessage):
+        return JSONResponse(
+            status_code=exc.status_code,
+            content={"detail": str(exc.detail)},
+        )
+    return JSONResponse(
+        status_code=exc.status_code,
+        content={"detail": exc.detail},
+    )
+
 
 app.include_router(users.router)
 
