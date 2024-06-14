@@ -14,7 +14,7 @@ from service import auth, database_client as db_client
 router = APIRouter()
 
 
-@router.post("/login", response_model=Token)
+@router.post("/login", response_model=Token, tags=["api-auth"])
 async def login_for_access_token(
     body: LoginRequest,
     db_session: AsyncSession = Depends(get_db),
@@ -37,14 +37,14 @@ async def login_for_access_token(
     return {"access_token": access_token, "token_type": "bearer"}
 
 
-@router.get("/users/me", response_model=User, tags=["users"])
+@router.get("/users/me", response_model=User, tags=["user"])
 async def get_user_me(current_user: User = Depends(get_current_user)):
     """Returns the profile of the currenty logged in user."""
 
     return current_user
 
 
-@router.post("/register", response_model=User)
+@router.post("/register", response_model=User, tags=["api-auth"])
 async def register_user(
     body: RegistrationRequest,
     db_session: AsyncSession = Depends(get_db),
