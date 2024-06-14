@@ -35,11 +35,6 @@ async def login_for_access_token(
     return {"access_token": access_token, "token_type": "bearer"}
 
 
-@router.get("/users", tags=["users"])
-async def get_users():
-    return []
-
-
 @router.get("/users/me", response_model=User, tags=["users"])
 async def get_user_me(current_user: User = Depends(get_current_user)):
     return current_user

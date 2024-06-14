@@ -9,7 +9,6 @@ from sqlalchemy.ext.asyncio import (
 )
 from sqlalchemy.orm import sessionmaker
 
-from models.api_models import UserInDB
 from models.db_models import metadata, DB_User
 
 

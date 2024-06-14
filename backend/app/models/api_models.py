@@ -26,13 +26,5 @@ class UserBase(BaseModel):
     email: str | None = None
 
 
-class UserCreate(UserBase):
-    password: str
-
-
 class User(UserBase):
     id: int
-
-
-class UserInDB(UserBase):
-    hashed_password: str
