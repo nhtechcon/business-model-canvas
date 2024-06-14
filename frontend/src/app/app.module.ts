@@ -20,6 +20,8 @@ import { PageLoginComponent } from "./pages/page-login/page-login.component";
 import { PageOverviewComponent } from "./pages/page-overview/page-overview.component";
 import { LogoComponent } from "./components/logo/logo.component";
 import { canvasListReducer } from "./store/reducers/canvas-list.reducer";
+import { ApiModule, Configuration } from "./core/services/api-client";
+import { PageRegisterComponent } from "./pages/page-register/page-register.component";
 
 @NgModule({
   declarations: [
@@ -27,6 +29,7 @@ import { canvasListReducer } from "./store/reducers/canvas-list.reducer";
     PageMainComponent,
     PageLoginComponent,
     PageOverviewComponent,
+    PageRegisterComponent,
     ToolbarComponent,
     SidebarComponent,
     LogoComponent,
@@ -54,6 +57,7 @@ import { canvasListReducer } from "./store/reducers/canvas-list.reducer";
     }),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
     ReactiveFormsModule,
+    ApiModule.forRoot(() => new Configuration()),
   ],
   providers: [
     provideStore({

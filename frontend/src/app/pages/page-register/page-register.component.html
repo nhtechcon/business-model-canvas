@@ -3,14 +3,31 @@
 >
   <app-logo></app-logo>
 
-  <form [formGroup]="loginForm" (ngSubmit)="login()" novalidate class="mt-6 w-full">
+  <p-button
+    label="Back to Login"
+    routerLink="/login"
+    icon="pi pi-arrow-left"
+    [text]="true"
+    severity="secondary"
+  />
+
+  <form [formGroup]="registerForm" (ngSubmit)="register()" novalidate class="mt-6 w-full">
     <p-card>
+      <h3 class="mb-5 mt-2">Create a new account</h3>
+
       <!-- Username -->
       <p-inputGroup>
         <p-inputGroupAddon>
           <i class="pi pi-user"></i>
         </p-inputGroupAddon>
         <input pInputText placeholder="Username" formControlName="username" />
+      </p-inputGroup>
+      <!-- E-Mail -->
+      <p-inputGroup class="mt-2">
+        <p-inputGroupAddon>
+          <i class="pi pi-at"></i>
+        </p-inputGroupAddon>
+        <input pInputText placeholder="E-Mail" formControlName="username" />
       </p-inputGroup>
       <!-- Password -->
       <p-inputGroup class="mt-2">
@@ -22,28 +39,28 @@
           formControlName="password"
         />
       </p-inputGroup>
+      <!-- Password Repeat -->
+      <p-inputGroup class="mt-2">
+        <p-inputGroupAddon><i class="pi pi-key"></i></p-inputGroupAddon>
+        <input
+          pInputText
+          placeholder="Password (repeat)"
+          type="password"
+          formControlName="password"
+        />
+      </p-inputGroup>
 
       <ng-template pTemplate="footer">
         <div class="flex gap-3 mt-1">
           <p-button
-            label="Clear"
-            severity="secondary"
-            class="w-full"
-            styleClass="w-full"
-          />
-          <p-button
             label="Login"
             class="w-full"
             styleClass="w-full"
-            [disabled]="loginForm.invalid"
+            [disabled]="registerForm.invalid"
             type="submit"
           />
         </div>
       </ng-template>
     </p-card>
   </form>
-
-  <p>
-    <a routerLink="/register">Create account</a>
-  </p>
 </div>
