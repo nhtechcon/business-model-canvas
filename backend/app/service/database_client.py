@@ -55,3 +55,12 @@ async def get_user_by_username(
 
     if user:
         return user
+
+
+async def get_user_by_email(db_session: AsyncSession, email: str) -> DB_User:
+    user = (
+        await db_session.scalars(select(DB_User).where(DB_User.email == email))
+    ).first()
+
+    if user:
+        return user

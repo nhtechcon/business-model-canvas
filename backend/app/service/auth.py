@@ -8,7 +8,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from config import ACCESS_TOKEN_EXPIRE_MINUTES, JWT_ALGORITHM, JWT_SECRET_KEY
 from service import database_client as db
-from models.api_models import TokenData
+from models.api_models import TokenData, RegistrationRequest
 from models.db_models import DB_User
 
 
@@ -58,3 +58,23 @@ def decode_access_jwt(token: str) -> TokenData:
         return None
 
     return TokenData(username=username)
+
+
+async def create_user(
+    db_session: AsyncSession, user: RegistrationRequest
+) -> DB_User:
+    """Registers the given user by creating it in the database."""
+    password_hash = PasswordHash.recommended()
+    hashed_password = password_hash.hash(user.password1)
+
+    db_user = DB_User(
+        username=user.username,
+        email=user.email,
+        hashed_password=hashed_password,
+    )
+
+    db_session.add(db_user)
+    await db_session.commit()
+    await db_session.refresh(db_user)
+
+    return db_user

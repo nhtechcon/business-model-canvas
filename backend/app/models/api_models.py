@@ -2,12 +2,19 @@
 This module contains the api models based on pydantic
 """
 
-from pydantic import BaseModel
+from pydantic import BaseModel, EmailStr
 
 
 class LoginRequest(BaseModel):
     username: str
     password: str
+
+
+class RegistrationRequest(BaseModel):
+    username: str
+    password1: str
+    password2: str
+    email: EmailStr
 
 
 class Token(BaseModel):
@@ -21,8 +28,6 @@ class TokenData(BaseModel):
 
 class UserBase(BaseModel):
     username: str
-    first_name: str | None = None
-    last_name: str | None = None
     email: str | None = None
 
 
