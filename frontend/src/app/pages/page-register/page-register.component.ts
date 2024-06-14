@@ -5,6 +5,7 @@ import {
   ApiAuthService,
   RegistrationRequest,
 } from "src/app/core/services/api-client";
+import { ToastService } from "src/app/core/services/toast.service";
 
 @Component({
   selector: "app-page-register",
@@ -25,7 +26,8 @@ export class PageRegisterComponent {
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private apiAuth: ApiAuthService
+    private apiAuth: ApiAuthService,
+    private toast: ToastService
   ) {}
 
   register() {
@@ -41,11 +43,20 @@ export class PageRegisterComponent {
 
     this.apiAuth.registerUserRegisterPost(requestData).subscribe({
       next: response => {
-        console.log("Registration successful", response);
-        this.router.navigate(["/home"]);
+        this.toast.showToast({
+          severity: "success",
+          summary: "Success",
+          detail: "User has been registered.",
+        });
+
+        this.router.navigate(["/login"]);
       },
       error: error => {
-        console.error("Registration failed", error);
+        this.toast.showToast({
+          severity: "error",
+          summary: "Oh no :/",
+          detail: "Registration failed.",
+        });
       },
     });
   }
