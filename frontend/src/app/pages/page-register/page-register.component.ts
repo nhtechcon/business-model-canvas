@@ -15,13 +15,11 @@ export class PageRegisterComponent {
   registerForm = this.formBuilder.group({
     username: [
       "",
-      Validators.required,
-      Validators.minLength(3),
-      Validators.maxLength(30),
+      [Validators.required, Validators.minLength(3), Validators.maxLength(30)],
     ],
-    email: ["", Validators.required, Validators.email],
-    password1: ["", Validators.required, Validators.minLength(6)],
-    password2: ["", Validators.required, Validators.minLength(6)],
+    email: ["", [Validators.required, Validators.email]],
+    password1: ["", [Validators.required, Validators.minLength(6)]],
+    password2: ["", [Validators.required, Validators.minLength(6)]],
   });
 
   constructor(
