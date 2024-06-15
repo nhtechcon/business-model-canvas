@@ -22,6 +22,7 @@ import { LogoComponent } from "./components/logo/logo.component";
 import { canvasListReducer } from "./store/reducers/canvas-list.reducer";
 import { ApiModule, Configuration } from "./core/services/api-client";
 import { PageRegisterComponent } from "./pages/page-register/page-register.component";
+import { environment } from "src/environments/environment";
 
 @NgModule({
   declarations: [
@@ -57,7 +58,9 @@ import { PageRegisterComponent } from "./pages/page-register/page-register.compo
     }),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
     ReactiveFormsModule,
-    ApiModule.forRoot(() => new Configuration()),
+    ApiModule.forRoot(
+      () => new Configuration({ basePath: environment.apiUrl })
+    ),
   ],
   providers: [
     provideStore({
