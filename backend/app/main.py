@@ -4,10 +4,12 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.responses import JSONResponse
+from fastapi.middleware.cors import CORSMiddleware
 
 from routers import users
 from models.errors import ErrorMessage
 from service.database_client import init_tables
+from config import ALLOWED_CORS_ORIGINS, LOG_LEVEL
 
 
 @asynccontextmanager
@@ -36,10 +38,24 @@ async def custom_http_exception_handler(request: Request, exc: HTTPException):
     )
 
 
-app.include_router(users.router)
+app.include_router(users.router, prefix="/api")
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=ALLOWED_CORS_ORIGINS,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 if __name__ == "__main__":
     import uvicorn
 
-    uvicorn.run("main:app", host="0.0.0.0", port=8080, reload=True)
+    uvicorn.run(
+        "main:app",
+        host="0.0.0.0",
+        port=8080,
+        reload=True,
+        log_level=LOG_LEVEL,
+    )
