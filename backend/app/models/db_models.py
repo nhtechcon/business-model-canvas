@@ -90,6 +90,7 @@ class DB_BmcEntry(Base):
     creator_id: Mapped[int] = mapped_column(ForeignKey("users.id"))
 
     canvas = relationship("DB_Canvas", back_populates="entries")
+    creator = relationship("DB_User")
 
 
 class DB_UserCanvas(Base):

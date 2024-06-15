@@ -37,7 +37,9 @@ async def create_canvas(
 ):
     """Creates a new canvas under the name of the user."""
 
-    new_canvas = db_client.create_canvas(db_session, req.name, current_user.id)
+    new_canvas = await db_client.create_canvas(
+        db_session, req.name, current_user.id
+    )
 
     return new_canvas
 
