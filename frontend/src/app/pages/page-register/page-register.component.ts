@@ -46,16 +46,17 @@ export class PageRegisterComponent {
         this.toast.showToast({
           severity: "success",
           summary: "Success",
-          detail: "User has been registered.",
+          detail: "User has been registered. You can now login.",
         });
 
         this.router.navigate(["/login"]);
       },
       error: error => {
+        const message = "Registration failed. " + (error.error.detail || "");
         this.toast.showToast({
           severity: "error",
           summary: "Oh no :/",
-          detail: "Registration failed.",
+          detail: message,
         });
       },
     });
