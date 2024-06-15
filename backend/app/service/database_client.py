@@ -76,3 +76,13 @@ async def get_canvases_created_by_user(
     ).all()
 
     return user_canvases or []
+
+
+async def create_canvas(
+    db_session: AsyncSession, name: str, creator_id: int
+) -> DB_Canvas:
+    new_canvas = DB_Canvas(name=name, creator_id=creator_id)
+    db_session.add(new_canvas)
+    await db_session.commit()
+    await db_session.refresh(new_canvas)
+    return new_canvas

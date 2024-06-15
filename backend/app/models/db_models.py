@@ -62,6 +62,10 @@ class DB_Canvas(Base):
         "DB_BmcEntry", back_populates="canvas", cascade="all, delete-orphan"
     )
 
+    def __init__(self, name: str, creator_id: int):
+        self.name = name
+        self.creator_id = creator_id
+
 
 class DB_BmcEntry(Base):
     """Represents an entry in the business model canvas with all its
