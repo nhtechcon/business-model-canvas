@@ -2,6 +2,8 @@
 This module contains the api models based on pydantic
 """
 
+from datetime import datetime
+
 from pydantic import BaseModel, EmailStr
 
 
@@ -33,3 +35,13 @@ class UserBase(BaseModel):
 
 class User(UserBase):
     id: int
+
+
+class Canvas(BaseModel):
+    id: int
+    name: str
+    creation_date: datetime
+    last_edit_date: datetime
+
+    class Config:
+        orm_mode = True

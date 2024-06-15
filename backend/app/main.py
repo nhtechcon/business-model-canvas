@@ -6,7 +6,7 @@ from fastapi import FastAPI, HTTPException, Request
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 
-from routers import users
+from routers import users, canvas
 from models.errors import ErrorMessage
 from service.database_client import init_tables
 from config import ALLOWED_CORS_ORIGINS, LOG_LEVEL
@@ -39,6 +39,7 @@ async def custom_http_exception_handler(request: Request, exc: HTTPException):
 
 
 app.include_router(users.router, prefix="/api")
+app.include_router(canvas.router, prefix="/api")
 
 app.add_middleware(
     CORSMiddleware,

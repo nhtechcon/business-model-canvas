@@ -31,6 +31,11 @@ class DB_User(Base):
     email: Mapped[str] = mapped_column(index=True, unique=True)
     hashed_password: Mapped[str]
 
+    # Define the relationship to canvases through the association table
+    canvases = relationship(
+        "DB_Canvas", secondary="user_canvases", back_populates="users"
+    )
+
 
 class DB_Canvas(Base):
     """This table holds basic information about all canvases."""
@@ -48,9 +53,10 @@ class DB_Canvas(Base):
         default=partial(datetime.now, tz=UTC),
         onupdate=partial(datetime.now, tz=UTC),
     )
+    creator_id: Mapped[int] = mapped_column(ForeignKey("users.id"))
 
     users = relationship(
-        "DB_User", secondary="user_canvases", back_populates="canvas"
+        "DB_User", secondary="user_canvases", back_populates="canvases"
     )
     entries = relationship(
         "DB_BmcEntry", back_populates="canvas", cascade="all, delete-orphan"

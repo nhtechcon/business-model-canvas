@@ -9,7 +9,7 @@ from sqlalchemy.ext.asyncio import (
 )
 from sqlalchemy.orm import sessionmaker
 
-from models.db_models import metadata, DB_User
+from models.db_models import metadata, DB_User, DB_Canvas
 
 
 DATABASE_URL = "sqlite+aiosqlite:///./data.sqlite"
@@ -64,3 +64,15 @@ async def get_user_by_email(db_session: AsyncSession, email: str) -> DB_User:
 
     if user:
         return user
+
+
+async def get_canvases_created_by_user(
+    db_session: AsyncSession, user_id: int
+) -> list[DB_Canvas]:
+    user_canvases = (
+        await db_session.scalars(
+            select(DB_Canvas).where(DB_Canvas.creator_id == user_id)
+        )
+    ).all()
+
+    return user_canvases or []
