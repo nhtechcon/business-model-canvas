@@ -9,7 +9,13 @@ from sqlalchemy.ext.asyncio import (
 )
 from sqlalchemy.orm import sessionmaker
 
-from models.db_models import metadata, DB_User, DB_Canvas
+from models.db_models import (
+    metadata,
+    DB_User,
+    DB_Canvas,
+    DB_UserCanvas,
+    DB_BmcEntry,
+)
 
 
 DATABASE_URL = "sqlite+aiosqlite:///./data.sqlite"
@@ -81,8 +87,28 @@ async def get_canvases_created_by_user(
 async def create_canvas(
     db_session: AsyncSession, name: str, creator_id: int
 ) -> DB_Canvas:
+
     new_canvas = DB_Canvas(name=name, creator_id=creator_id)
-    db_session.add(new_canvas)
-    await db_session.commit()
-    await db_session.refresh(new_canvas)
-    return new_canvas
+
+    try:
+        async with db_session.begin():
+            # Create canvas
+            db_session.add(new_canvas)
+            await db_session.flush()
+            await db_session.refresh(new_canvas)
+
+            # Create mapping
+            db_user_canvas = DB_UserCanvas(
+                user_id=creator_id,
+                canvas_id=new_canvas.id,
+                is_creator=True,
+            )
+            db_session.add(db_user_canvas)
+
+        await db_session.refresh(new_canvas)
+
+        return new_canvas
+
+    except Exception as exc:
+        await db_session.rollback()
+        raise exc

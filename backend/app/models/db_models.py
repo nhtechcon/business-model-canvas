@@ -105,3 +105,4 @@ class DB_UserCanvas(Base):
     canvas_id: Mapped[int] = mapped_column(
         ForeignKey("canvas.id"), primary_key=True
     )
+    is_creator: Mapped[bool] = mapped_column(nullable=False)
