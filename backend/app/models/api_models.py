@@ -6,6 +6,8 @@ from datetime import datetime
 
 from pydantic import BaseModel, EmailStr
 
+from models.common_models import BmcEntity
+
 
 class LoginRequest(BaseModel):
     username: str
@@ -51,3 +53,12 @@ class CreateCanvasRequest(BaseModel):
     name: str
 
 
+class BmcEntry(BaseModel):
+    id: int
+    text: str
+    date: datetime
+    last_updated: datetime
+    entity: BmcEntity
+
+    class Config:
+        orm_mode = True

@@ -7,7 +7,7 @@ from sqlalchemy.ext.asyncio import (
     create_async_engine,
     AsyncSession,
 )
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import sessionmaker, selectinload
 
 from models.db_models import (
     metadata,
@@ -84,6 +84,21 @@ async def get_canvases_created_by_user(
     return user_canvases or []
 
 
+async def get_user_canvas(
+    db_session: AsyncSession, user_id: int, canvas_id: int
+) -> DB_Canvas:
+    canvas = (
+        await db_session.scalars(
+            select(DB_Canvas)
+            .where(DB_Canvas.creator_id == user_id, DB_Canvas.id == canvas_id)
+            .options(selectinload(DB_Canvas.entries))
+        )
+    ).first()
+
+    if canvas:
+        return canvas
+
+
 async def create_canvas(
     db_session: AsyncSession, name: str, creator_id: int
 ) -> DB_Canvas:
@@ -112,3 +127,18 @@ async def create_canvas(
     except Exception as exc:
         await db_session.rollback()
         raise exc
+
+
+async def get_canvas_entries(
+    db_session: AsyncSession, canvas_id: int
+) -> list[DB_BmcEntry]:
+
+    entries = (
+        await db_session.scalars(
+            select(DB_BmcEntry)
+            .where(DB_BmcEntry.canvas_id == canvas_id)
+            .order_by(DB_BmcEntry.last_updated)
+        )
+    ).all()
+
+    return entries or []

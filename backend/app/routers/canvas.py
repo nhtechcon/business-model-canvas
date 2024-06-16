@@ -2,10 +2,10 @@
 The api routes for retrieving and editing business model canvas data.
 """
 
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from dependencies.auth import get_current_user
+from dependencies.auth import get_current_user, can_user_access_canvas
 from dependencies.db_session import get_db
 from models import api_models, db_models
 from service import database_client as db_client
@@ -45,3 +45,19 @@ async def create_canvas(
 
     return new_canvas
 
+
+@router.get(
+    "/canvas/{canvas_id}/entries",
+    response_model=list[api_models.BmcEntry],
+    tags=["canvas"],
+)
+def get_canvas_entries(
+    canvas_id: int,
+    canvas: db_models.DB_Canvas = Depends(can_user_access_canvas),
+):
+    """Returns all canvas entries for the canvas if the user can access it."""
+
+    if not canvas:
+        raise HTTPException(status_code=404, detail="Canvas not found")
+
+    return canvas.entries
