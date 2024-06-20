@@ -33,16 +33,19 @@ async def authenticate_user(
     return user
 
 
-def create_access_token(data: dict) -> str:
-    """Creates a new JWT access token."""
+def create_access_token(data: dict) -> tuple[str, datetime]:
+    """Creates a new JWT access token. Returns it together with the
+    expiration date."""
 
     to_encode = data.copy()
-    expires = datetime.now(UTC) + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+    expires_at = datetime.now(UTC) + timedelta(
+        minutes=ACCESS_TOKEN_EXPIRE_MINUTES
+    )
 
-    to_encode.update({"exp": expires})
+    to_encode.update({"exp": expires_at})
     encoded_jwt = jwt.encode(to_encode, JWT_SECRET_KEY, algorithm=JWT_ALGORITHM)
 
-    return encoded_jwt
+    return encoded_jwt, expires_at
 
 
 def decode_access_jwt(token: str) -> TokenData:

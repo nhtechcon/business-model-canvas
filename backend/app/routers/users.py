@@ -32,9 +32,15 @@ async def login_for_access_token(
             detail=UserErrorMessages.INCORRECT_USERNAME_PASSWORD,
         )
 
-    access_token = auth.create_access_token(data={"sub": user.username})
+    access_token, expires_at = auth.create_access_token(
+        data={"sub": user.username}
+    )
 
-    return {"access_token": access_token, "token_type": "bearer"}
+    return {
+        "access_token": access_token,
+        "token_type": "bearer",
+        "expires_at": expires_at,
+    }
 
 
 @router.get("/users/me", response_model=User, tags=["user"])
