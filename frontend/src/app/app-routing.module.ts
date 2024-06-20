@@ -4,6 +4,7 @@ import { PageMainComponent } from "./pages/page-main/page-main.component";
 import { PageLoginComponent } from "./pages/page-login/page-login.component";
 import { PageOverviewComponent } from "./pages/page-overview/page-overview.component";
 import { PageRegisterComponent } from "./pages/page-register/page-register.component";
+import { isAuthenticatedGuard } from "./core/guards/is-authenticated.guard";
 
 const routes: Routes = [
   {
@@ -16,6 +17,7 @@ const routes: Routes = [
   },
   {
     path: "main",
+    canActivate: [isAuthenticatedGuard],
     children: [
       {
         path: "overview",
@@ -35,6 +37,10 @@ const routes: Routes = [
   {
     path: "",
     pathMatch: "full",
+    redirectTo: "login",
+  },
+  {
+    path: "**",
     redirectTo: "login",
   },
 ];
