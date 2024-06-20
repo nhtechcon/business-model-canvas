@@ -28,6 +28,6 @@ export interface UserServiceInterface {
      * Get User Me
      * Returns the profile of the currenty logged in user.
      */
-    getUserMeUsersMeGet(extraHttpRequestParams?: any): Observable<User>;
+    getUserMeApiUsersMeGet(extraHttpRequestParams?: any): Observable<User>;
 
 }

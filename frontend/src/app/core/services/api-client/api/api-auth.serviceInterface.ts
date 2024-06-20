@@ -33,13 +33,13 @@ export interface ApiAuthServiceInterface {
      * Login endpoint which returns an access token for valid login credentials.
      * @param loginRequest 
      */
-    loginForAccessTokenLoginPost(loginRequest: LoginRequest, extraHttpRequestParams?: any): Observable<Token>;
+    loginForAccessTokenApiLoginPost(loginRequest: LoginRequest, extraHttpRequestParams?: any): Observable<Token>;
 
     /**
      * Register User
      * User registration endpoint
      * @param registrationRequest 
      */
-    registerUserRegisterPost(registrationRequest: RegistrationRequest, extraHttpRequestParams?: any): Observable<User>;
+    registerUserApiRegisterPost(registrationRequest: RegistrationRequest, extraHttpRequestParams?: any): Observable<User>;
 
 }

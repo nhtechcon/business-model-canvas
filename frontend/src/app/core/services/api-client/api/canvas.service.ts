@@ -19,29 +19,27 @@ import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 // @ts-ignore
+import { BmcEntry } from '../model/bmc-entry.model';
+// @ts-ignore
+import { Canvas } from '../model/canvas.model';
+// @ts-ignore
+import { CreateCanvasRequest } from '../model/create-canvas-request.model';
+// @ts-ignore
 import { HTTPValidationError } from '../model/http-validation-error.model';
-// @ts-ignore
-import { LoginRequest } from '../model/login-request.model';
-// @ts-ignore
-import { RegistrationRequest } from '../model/registration-request.model';
-// @ts-ignore
-import { Token } from '../model/token.model';
-// @ts-ignore
-import { User } from '../model/user.model';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
 import {
-    ApiAuthServiceInterface
-} from './api-auth.serviceInterface';
+    CanvasServiceInterface
+} from './canvas.serviceInterface';
 
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class ApiAuthService implements ApiAuthServiceInterface {
+export class CanvasService implements CanvasServiceInterface {
 
     protected basePath = 'http://localhost';
     public defaultHeaders = new HttpHeaders();
@@ -104,21 +102,28 @@ export class ApiAuthService implements ApiAuthServiceInterface {
     }
 
     /**
-     * Login For Access Token
-     * Login endpoint which returns an access token for valid login credentials.
-     * @param loginRequest 
+     * Create Canvas
+     * Creates a new canvas under the name of the user.
+     * @param createCanvasRequest 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public loginForAccessTokenApiLoginPost(loginRequest: LoginRequest, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Token>;
-    public loginForAccessTokenApiLoginPost(loginRequest: LoginRequest, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Token>>;
-    public loginForAccessTokenApiLoginPost(loginRequest: LoginRequest, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Token>>;
-    public loginForAccessTokenApiLoginPost(loginRequest: LoginRequest, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
-        if (loginRequest === null || loginRequest === undefined) {
-            throw new Error('Required parameter loginRequest was null or undefined when calling loginForAccessTokenApiLoginPost.');
+    public createCanvasApiCanvasPost(createCanvasRequest: CreateCanvasRequest, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Canvas>;
+    public createCanvasApiCanvasPost(createCanvasRequest: CreateCanvasRequest, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Canvas>>;
+    public createCanvasApiCanvasPost(createCanvasRequest: CreateCanvasRequest, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Canvas>>;
+    public createCanvasApiCanvasPost(createCanvasRequest: CreateCanvasRequest, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        if (createCanvasRequest === null || createCanvasRequest === undefined) {
+            throw new Error('Required parameter createCanvasRequest was null or undefined when calling createCanvasApiCanvasPost.');
         }
 
         let localVarHeaders = this.defaultHeaders;
+
+        let localVarCredential: string | undefined;
+        // authentication (OAuth2PasswordBearer) required
+        localVarCredential = this.configuration.lookupCredential('OAuth2PasswordBearer');
+        if (localVarCredential) {
+            localVarHeaders = localVarHeaders.set('Authorization', 'Bearer ' + localVarCredential);
+        }
 
         let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
         if (localVarHttpHeaderAcceptSelected === undefined) {
@@ -158,11 +163,11 @@ export class ApiAuthService implements ApiAuthServiceInterface {
             }
         }
 
-        let localVarPath = `/api/login`;
-        return this.httpClient.request<Token>('post', `${this.configuration.basePath}${localVarPath}`,
+        let localVarPath = `/api/canvas`;
+        return this.httpClient.request<Canvas>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: loginRequest,
+                body: createCanvasRequest,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
@@ -173,21 +178,28 @@ export class ApiAuthService implements ApiAuthServiceInterface {
     }
 
     /**
-     * Register User
-     * User registration endpoint
-     * @param registrationRequest 
+     * Get Canvas Entries
+     * Returns all canvas entries for the canvas if the user can access it.
+     * @param canvasId 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public registerUserApiRegisterPost(registrationRequest: RegistrationRequest, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<User>;
-    public registerUserApiRegisterPost(registrationRequest: RegistrationRequest, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<User>>;
-    public registerUserApiRegisterPost(registrationRequest: RegistrationRequest, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<User>>;
-    public registerUserApiRegisterPost(registrationRequest: RegistrationRequest, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
-        if (registrationRequest === null || registrationRequest === undefined) {
-            throw new Error('Required parameter registrationRequest was null or undefined when calling registerUserApiRegisterPost.');
+    public getCanvasEntriesApiCanvasCanvasIdEntriesGet(canvasId: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<BmcEntry>>;
+    public getCanvasEntriesApiCanvasCanvasIdEntriesGet(canvasId: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<BmcEntry>>>;
+    public getCanvasEntriesApiCanvasCanvasIdEntriesGet(canvasId: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<BmcEntry>>>;
+    public getCanvasEntriesApiCanvasCanvasIdEntriesGet(canvasId: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        if (canvasId === null || canvasId === undefined) {
+            throw new Error('Required parameter canvasId was null or undefined when calling getCanvasEntriesApiCanvasCanvasIdEntriesGet.');
         }
 
         let localVarHeaders = this.defaultHeaders;
+
+        let localVarCredential: string | undefined;
+        // authentication (OAuth2PasswordBearer) required
+        localVarCredential = this.configuration.lookupCredential('OAuth2PasswordBearer');
+        if (localVarCredential) {
+            localVarHeaders = localVarHeaders.set('Authorization', 'Bearer ' + localVarCredential);
+        }
 
         let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
         if (localVarHttpHeaderAcceptSelected === undefined) {
@@ -207,14 +219,67 @@ export class ApiAuthService implements ApiAuthServiceInterface {
         }
 
 
-        // to determine the Content-Type header
-        const consumes: string[] = [
-            'application/json'
-        ];
-        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
-        if (httpContentTypeSelected !== undefined) {
-            localVarHeaders = localVarHeaders.set('Content-Type', httpContentTypeSelected);
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
         }
+
+        let localVarPath = `/api/canvas/${this.configuration.encodeParam({name: "canvasId", value: canvasId, in: "path", style: "simple", explode: false, dataType: "number", dataFormat: undefined})}/entries`;
+        return this.httpClient.request<Array<BmcEntry>>('get', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Get User Canvases
+     * Returns all canvases a user has created.
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getUserCanvasesApiUserCanvasesGet(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<Canvas>>;
+    public getUserCanvasesApiUserCanvasesGet(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<Canvas>>>;
+    public getUserCanvasesApiUserCanvasesGet(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<Canvas>>>;
+    public getUserCanvasesApiUserCanvasesGet(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarCredential: string | undefined;
+        // authentication (OAuth2PasswordBearer) required
+        localVarCredential = this.configuration.lookupCredential('OAuth2PasswordBearer');
+        if (localVarCredential) {
+            localVarHeaders = localVarHeaders.set('Authorization', 'Bearer ' + localVarCredential);
+        }
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                'application/json'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
 
         let responseType_: 'text' | 'json' | 'blob' = 'json';
         if (localVarHttpHeaderAcceptSelected) {
@@ -227,11 +292,10 @@ export class ApiAuthService implements ApiAuthServiceInterface {
             }
         }
 
-        let localVarPath = `/api/register`;
-        return this.httpClient.request<User>('post', `${this.configuration.basePath}${localVarPath}`,
+        let localVarPath = `/api/user-canvases`;
+        return this.httpClient.request<Array<Canvas>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: registrationRequest,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,

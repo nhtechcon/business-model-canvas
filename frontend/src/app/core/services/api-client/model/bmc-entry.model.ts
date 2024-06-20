@@ -9,13 +9,17 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { TokenData } from './token-data.model';
+import { BmcEntity } from './bmc-entity.model';
 
 
-export interface Token { 
-    access_token: string;
-    token_type: string;
-    expires_at: string;
-    token_data: TokenData;
+export interface BmcEntry { 
+    id: number;
+    text: string;
+    date: string;
+    last_updated: string;
+    entity: BmcEntity;
 }
+export namespace BmcEntry {
+}
+
 

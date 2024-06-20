@@ -9,13 +9,11 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { TokenData } from './token-data.model';
 
 
-export interface Token { 
-    access_token: string;
-    token_type: string;
-    expires_at: string;
-    token_data: TokenData;
+export interface TokenData { 
+    id: number;
+    username?: string | null;
+    email: string;
 }
 
