@@ -7,7 +7,13 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from dependencies.db_session import get_db
 from dependencies.auth import get_current_user
-from models.api_models import Token, LoginRequest, User, RegistrationRequest
+from models.api_models import (
+    Token,
+    LoginRequest,
+    User,
+    RegistrationRequest,
+    TokenData,
+)
 from models.errors import UserErrorMessages
 from service import auth, database_client as db_client
 
@@ -32,14 +38,19 @@ async def login_for_access_token(
             detail=UserErrorMessages.INCORRECT_USERNAME_PASSWORD,
         )
 
-    access_token, expires_at = auth.create_access_token(
-        data={"sub": user.username}
+    token_data = TokenData(
+        id=user.id,
+        username=user.username,
+        email=user.email,
     )
+
+    access_token, expires_at = auth.create_access_token(token_data)
 
     return {
         "access_token": access_token,
         "token_type": "bearer",
         "expires_at": expires_at,
+        "token_data": token_data,
     }
 
 

@@ -4,7 +4,7 @@ This module contains the api models based on pydantic
 
 from datetime import datetime
 
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel, ConfigDict, EmailStr
 
 from models.common_models import BmcEntity
 
@@ -21,14 +21,21 @@ class RegistrationRequest(BaseModel):
     email: EmailStr
 
 
+class TokenData(BaseModel):
+    model_config = ConfigDict(extra="ignore")
+
+    id: int
+    username: str | None = None
+    email: EmailStr
+
+
 class Token(BaseModel):
+    model_config = ConfigDict(extra="ignore")
+
     access_token: str
     token_type: str
     expires_at: datetime
-
-
-class TokenData(BaseModel):
-    username: str | None = None
+    token_data: TokenData
 
 
 class UserBase(BaseModel):
