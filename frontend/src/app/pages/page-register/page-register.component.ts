@@ -41,8 +41,8 @@ export class PageRegisterComponent {
       password2: formValues.password2!,
     };
 
-    this.apiAuth.registerUserRegisterPost(requestData).subscribe({
-      next: response => {
+    this.apiAuth.registerUserApiRegisterPost(requestData).subscribe({
+      next: _ => {
         this.toast.showToast({
           severity: "success",
           summary: "Success",
