@@ -80,6 +80,52 @@
     label="Create a canvas"
     icon="pi pi-plus"
     severity="info"
-    routerLink="/main/canvas"
+    (click)="newCanvasDialogVisible = true"
   />
+
+  <p-dialog
+    header="Alright!"
+    [modal]="true"
+    [(visible)]="newCanvasDialogVisible"
+    [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }"
+    [style]="{ width: '25rem' }"
+    [draggable]="false"
+    [resizable]="false"
+  >
+    <span class="p-text-secondary block mb-5">What's the name of your canvas?</span>
+    <div class="flex flex-column align-items-stretch gap-3 mb-3">
+      <input
+        pInputText
+        ngModel
+        required
+        minlength="3"
+        maxlength="50"
+        id="canvasName"
+        class="flex-auto"
+        autocomplete="off"
+        #canvasName="ngModel"
+      />
+      <div
+        *ngIf="canvasName.invalid && (canvasName.dirty || canvasName.touched)"
+        class="text-red-400"
+      >
+        <span *ngIf="canvasName.errors!['required']">Note: A name is required.</span>
+        <span *ngIf="canvasName.errors!['minlength']">
+          Note: The name must be at least 3 characters long.
+        </span>
+      </div>
+    </div>
+    <div class="flex justify-content-end gap-2">
+      <p-button
+        label="Cancel"
+        severity="secondary"
+        (click)="newCanvasDialogVisible = false"
+      />
+      <p-button
+        label="Start"
+        (click)="createNewCanvas(canvasName.value)"
+        [disabled]="canvasName.invalid"
+      />
+    </div>
+  </p-dialog>
 </ng-template>

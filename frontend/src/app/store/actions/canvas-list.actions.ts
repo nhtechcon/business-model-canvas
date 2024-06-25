@@ -1,6 +1,16 @@
 import { createAction, props } from "@ngrx/store";
 import { BasicBmcCanvasInfo } from "src/app/core/models/bmc-canvas.model";
 
+export const createCanvas = createAction(
+  "[Canvas List] Create a new canvas",
+  props<{ name: string }>()
+);
+
+export const createCanvasFailure = createAction(
+  "[Canvas List] Creating new canvas failed",
+  props<{ error: any }>()
+);
+
 export const addCanvas = createAction(
   "[Canvas List] Add Canvas to list",
   props<{ canvas: BasicBmcCanvasInfo }>()

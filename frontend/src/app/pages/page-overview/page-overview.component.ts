@@ -4,10 +4,13 @@ import { Store } from "@ngrx/store";
 import { Observable } from "rxjs";
 import { BasicBmcCanvasInfo } from "src/app/core/models/bmc-canvas.model";
 import { AuthService } from "src/app/core/services/auth.service";
-import { startLoadCanvases } from "src/app/store/actions/canvas-list.actions";
+import {
+  createCanvas,
+  startLoadCanvases,
+} from "src/app/store/actions/canvas-list.actions";
 import { LoadingState } from "src/app/store/common";
 import {
-  selectAllCanvases,
+  selectAllCanvasesSorted,
   selectLoadingState,
 } from "src/app/store/selectors/canvas-list.selectors";
 
@@ -20,18 +23,25 @@ export class PageOverviewComponent {
   canvasLoadingState$: Observable<LoadingState>;
   canvasList$: Observable<BasicBmcCanvasInfo[]>;
 
+  newCanvasDialogVisible = false;
+
   constructor(
     private store: Store,
     private auth: AuthService,
     private router: Router
   ) {
     this.canvasLoadingState$ = this.store.select(selectLoadingState);
-    this.canvasList$ = this.store.select(selectAllCanvases);
+    this.canvasList$ = this.store.select(selectAllCanvasesSorted);
     this.store.dispatch(startLoadCanvases());
   }
 
   protected logoutClick() {
     this.auth.logout();
     this.router.navigate(["/login"]);
+  }
+
+  protected createNewCanvas(name: string) {
+    this.newCanvasDialogVisible = false;
+    this.store.dispatch(createCanvas({ name }));
   }
 }
