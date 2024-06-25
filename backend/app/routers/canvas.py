@@ -47,12 +47,35 @@ async def create_canvas(
 
 
 @router.get(
+    "/canvas/{canvas_id}",
+    response_model=api_models.FullCanvas,
+    tags=["canvas"],
+)
+async def get_canvas(
+    canvas: db_models.DB_Canvas = Depends(can_user_access_canvas),
+):
+    """Returns the full canvas, with info and entries."""
+
+    if not canvas:
+        raise HTTPException(status_code=404, detail="Canvas not found")
+
+    entries = canvas.entries
+
+    return api_models.FullCanvas(
+        id=canvas.id,
+        name=canvas.name,
+        creation_date=canvas.creation_date,
+        last_edit_date=canvas.last_edit_date,
+        entries=entries,
+    )
+
+
+@router.get(
     "/canvas/{canvas_id}/entries",
     response_model=list[api_models.BmcEntry],
     tags=["canvas"],
 )
 async def get_canvas_entries(
-    canvas_id: str,
     canvas: db_models.DB_Canvas = Depends(can_user_access_canvas),
 ):
     """Returns all canvas entries for the canvas if the user can access it."""

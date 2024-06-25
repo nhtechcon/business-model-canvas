@@ -70,3 +70,7 @@ class BmcEntry(BaseModel):
 
     class Config:
         orm_mode = True
+
+
+class FullCanvas(Canvas, BaseModel):
+    entries: list[BmcEntry]
