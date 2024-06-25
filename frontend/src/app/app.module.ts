@@ -23,6 +23,8 @@ import { canvasListReducer } from "./store/reducers/canvas-list.reducer";
 import { ApiModule, Configuration } from "./core/services/api-client";
 import { PageRegisterComponent } from "./pages/page-register/page-register.component";
 import { environment } from "src/environments/environment";
+import { EffectsModule, provideEffects } from "@ngrx/effects";
+import { CanvasListEffects } from "./store/effects/canvas-list.effect";
 
 @NgModule({
   declarations: [
@@ -61,12 +63,14 @@ import { environment } from "src/environments/environment";
     ApiModule.forRoot(
       () => new Configuration({ basePath: environment.apiUrl })
     ),
+    EffectsModule.forRoot([CanvasListEffects]),
   ],
   providers: [
     provideStore({
       currentCanvas: currentCanvasReducer,
       canvasList: canvasListReducer,
     }),
+    provideEffects([CanvasListEffects]),
   ],
   bootstrap: [AppComponent],
 })

@@ -11,7 +11,14 @@ export const removeCanvas = createAction(
   props<{ id: string }>()
 );
 
-export const loadCanvases = createAction(
-  "[Canvas List] Load Canvases",
+export const startLoadCanvases = createAction("[Canvas List] Load Canvases");
+
+export const loadCanvasesSuccess = createAction(
+  "[Canvas List] Load Canvases Success",
   props<{ canvases: BasicBmcCanvasInfo[] }>()
+);
+
+export const loadCanvasesFailure = createAction(
+  "[Canvas List] Load Canvases Failure",
+  props<{ error: any }>()
 );

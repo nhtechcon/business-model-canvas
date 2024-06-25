@@ -10,3 +10,8 @@ export const selectAllCanvases = createSelector(
   selectCanvasListState,
   (state: CanvasListState) => state.canvases
 );
+
+export const selectLoadingState = createSelector(
+  selectCanvasListState,
+  (state: CanvasListState) => state.loadingState
+);

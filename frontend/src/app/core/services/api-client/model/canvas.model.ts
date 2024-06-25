@@ -12,7 +12,7 @@
 
 
 export interface Canvas { 
-    id: number;
+    id: string;
     name: string;
     creation_date: string;
     last_edit_date: string;
