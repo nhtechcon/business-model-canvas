@@ -2,6 +2,7 @@ export * from './bmc-entity.model';
 export * from './bmc-entry.model';
 export * from './canvas.model';
 export * from './create-canvas-request.model';
+export * from './full-canvas.model';
 export * from './http-validation-error.model';
 export * from './login-request.model';
 export * from './registration-request.model';

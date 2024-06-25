@@ -16,6 +16,7 @@ import { Observable }                                        from 'rxjs';
 import { BmcEntry } from '../model/models';
 import { Canvas } from '../model/models';
 import { CreateCanvasRequest } from '../model/models';
+import { FullCanvas } from '../model/models';
 import { HTTPValidationError } from '../model/models';
 
 
@@ -35,11 +36,18 @@ export interface CanvasServiceInterface {
     createCanvasApiCanvasPost(createCanvasRequest: CreateCanvasRequest, extraHttpRequestParams?: any): Observable<Canvas>;
 
     /**
+     * Get Canvas
+     * Returns the full canvas, with info and entries.
+     * @param canvasId 
+     */
+    getCanvasApiCanvasCanvasIdGet(canvasId: string, extraHttpRequestParams?: any): Observable<FullCanvas>;
+
+    /**
      * Get Canvas Entries
      * Returns all canvas entries for the canvas if the user can access it.
      * @param canvasId 
      */
-    getCanvasEntriesApiCanvasCanvasIdEntriesGet(canvasId: number, extraHttpRequestParams?: any): Observable<Array<BmcEntry>>;
+    getCanvasEntriesApiCanvasCanvasIdEntriesGet(canvasId: string, extraHttpRequestParams?: any): Observable<Array<BmcEntry>>;
 
     /**
      * Get User Canvases

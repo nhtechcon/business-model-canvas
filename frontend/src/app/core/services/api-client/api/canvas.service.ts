@@ -25,6 +25,8 @@ import { Canvas } from '../model/canvas.model';
 // @ts-ignore
 import { CreateCanvasRequest } from '../model/create-canvas-request.model';
 // @ts-ignore
+import { FullCanvas } from '../model/full-canvas.model';
+// @ts-ignore
 import { HTTPValidationError } from '../model/http-validation-error.model';
 
 // @ts-ignore
@@ -178,16 +180,82 @@ export class CanvasService implements CanvasServiceInterface {
     }
 
     /**
+     * Get Canvas
+     * Returns the full canvas, with info and entries.
+     * @param canvasId 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getCanvasApiCanvasCanvasIdGet(canvasId: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<FullCanvas>;
+    public getCanvasApiCanvasCanvasIdGet(canvasId: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<FullCanvas>>;
+    public getCanvasApiCanvasCanvasIdGet(canvasId: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<FullCanvas>>;
+    public getCanvasApiCanvasCanvasIdGet(canvasId: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        if (canvasId === null || canvasId === undefined) {
+            throw new Error('Required parameter canvasId was null or undefined when calling getCanvasApiCanvasCanvasIdGet.');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarCredential: string | undefined;
+        // authentication (OAuth2PasswordBearer) required
+        localVarCredential = this.configuration.lookupCredential('OAuth2PasswordBearer');
+        if (localVarCredential) {
+            localVarHeaders = localVarHeaders.set('Authorization', 'Bearer ' + localVarCredential);
+        }
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                'application/json'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/api/canvas/${this.configuration.encodeParam({name: "canvasId", value: canvasId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}`;
+        return this.httpClient.request<FullCanvas>('get', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
      * Get Canvas Entries
      * Returns all canvas entries for the canvas if the user can access it.
      * @param canvasId 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getCanvasEntriesApiCanvasCanvasIdEntriesGet(canvasId: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<BmcEntry>>;
-    public getCanvasEntriesApiCanvasCanvasIdEntriesGet(canvasId: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<BmcEntry>>>;
-    public getCanvasEntriesApiCanvasCanvasIdEntriesGet(canvasId: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<BmcEntry>>>;
-    public getCanvasEntriesApiCanvasCanvasIdEntriesGet(canvasId: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getCanvasEntriesApiCanvasCanvasIdEntriesGet(canvasId: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<BmcEntry>>;
+    public getCanvasEntriesApiCanvasCanvasIdEntriesGet(canvasId: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<BmcEntry>>>;
+    public getCanvasEntriesApiCanvasCanvasIdEntriesGet(canvasId: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<BmcEntry>>>;
+    public getCanvasEntriesApiCanvasCanvasIdEntriesGet(canvasId: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         if (canvasId === null || canvasId === undefined) {
             throw new Error('Required parameter canvasId was null or undefined when calling getCanvasEntriesApiCanvasCanvasIdEntriesGet.');
         }
@@ -230,7 +298,7 @@ export class CanvasService implements CanvasServiceInterface {
             }
         }
 
-        let localVarPath = `/api/canvas/${this.configuration.encodeParam({name: "canvasId", value: canvasId, in: "path", style: "simple", explode: false, dataType: "number", dataFormat: undefined})}/entries`;
+        let localVarPath = `/api/canvas/${this.configuration.encodeParam({name: "canvasId", value: canvasId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/entries`;
         return this.httpClient.request<Array<BmcEntry>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,

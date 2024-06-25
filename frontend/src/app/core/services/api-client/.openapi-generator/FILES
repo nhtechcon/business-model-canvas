@@ -17,6 +17,7 @@ model/bmc-entity.model.ts
 model/bmc-entry.model.ts
 model/canvas.model.ts
 model/create-canvas-request.model.ts
+model/full-canvas.model.ts
 model/http-validation-error.model.ts
 model/login-request.model.ts
 model/models.ts
