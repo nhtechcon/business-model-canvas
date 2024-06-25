@@ -5,6 +5,7 @@ import { PageLoginComponent } from "./pages/page-login/page-login.component";
 import { PageOverviewComponent } from "./pages/page-overview/page-overview.component";
 import { PageRegisterComponent } from "./pages/page-register/page-register.component";
 import { isAuthenticatedGuard } from "./core/guards/is-authenticated.guard";
+import { canvasResolver } from "./core/resolvers/canvas-data.resolver";
 
 const routes: Routes = [
   {
@@ -26,6 +27,13 @@ const routes: Routes = [
       {
         path: "canvas",
         component: PageMainComponent,
+      },
+      {
+        path: "canvas/:id",
+        component: PageMainComponent,
+        resolve: {
+          canvasData: canvasResolver,
+        },
       },
       {
         path: "",
