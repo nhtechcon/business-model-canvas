@@ -11,6 +11,7 @@ import { PasswordModule } from "primeng/password";
 import { TooltipModule } from "primeng/tooltip";
 import { TableModule } from "primeng/table";
 import { ToastModule } from "primeng/toast";
+import { ProgressSpinnerModule } from "primeng/progressspinner";
 
 /**
  * A module which imports all required primeng components.
@@ -29,6 +30,7 @@ import { ToastModule } from "primeng/toast";
     TooltipModule,
     TableModule,
     ToastModule,
+    ProgressSpinnerModule,
   ],
   exports: [
     InputTextModule,
@@ -43,6 +45,7 @@ import { ToastModule } from "primeng/toast";
     TooltipModule,
     TableModule,
     ToastModule,
+    ProgressSpinnerModule,
   ],
 })
 export class PrimeNGComponentsModule {}
