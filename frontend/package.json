@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "generate-api-client": "rm -rf ./src/app/core/services/api-client; npx @openapitools/openapi-generator-cli generate -i http://localhost:8080/openapi.json -g typescript-angular -o ./src/app/core/services/api-client --additional-properties=ngVersion=16.0.0,supportsES6=true,withInterfaces=true,fileNaming=kebab-case,modelFileSuffix=.model"
+    "generate-api-client": "rm -rf ./src/app/core/services/api-client; npx @openapitools/openapi-generator-cli generate -i http://localhost:8080/openapi.json -g typescript-angular -o ./src/app/core/services/api-client --additional-properties=ngVersion=16.0.0,supportsES6=true,withInterfaces=true,fileNaming=kebab-case,modelFileSuffix=.model,modelPropertyNaming=camelCase"
   },
   "private": true,
   "dependencies": {

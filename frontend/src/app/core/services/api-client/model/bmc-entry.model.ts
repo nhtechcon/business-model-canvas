@@ -16,7 +16,7 @@ export interface BmcEntry {
     id: number;
     text: string;
     date: string;
-    last_updated: string;
+    lastUpdated: string;
     entity: BmcEntity;
 }
 export namespace BmcEntry {

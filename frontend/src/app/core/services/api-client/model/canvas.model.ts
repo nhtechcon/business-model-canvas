@@ -14,7 +14,7 @@
 export interface Canvas { 
     id: string;
     name: string;
-    creation_date: string;
-    last_edit_date: string;
+    creationDate: string;
+    lastEditDate: string;
 }
 

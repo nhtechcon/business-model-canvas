@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { of } from "rxjs";
-import { catchError, delay, map, mergeMap, tap } from "rxjs/operators";
+import { catchError, map, mergeMap } from "rxjs/operators";
 import * as CanvasActions from "../actions/canvas-list.actions";
 import { Canvas, CanvasService } from "src/app/core/services/api-client";
 import { parseISO } from "date-fns";
@@ -17,10 +17,9 @@ export class CanvasListEffects {
           map((canvases: Canvas[]) =>
             CanvasActions.loadCanvasesSuccess({
               canvases: canvases.map(row => ({
-                id: row.id,
-                name: row.name,
-                creationDate: parseISO(row.creation_date),
-                lastEditDate: parseISO(row.last_edit_date),
+                ...row,
+                creationDate: parseISO(row.creationDate),
+                lastEditDate: parseISO(row.lastEditDate),
               })),
             })
           ),
@@ -38,10 +37,9 @@ export class CanvasListEffects {
           map((canvas: Canvas) =>
             CanvasActions.addCanvas({
               canvas: {
-                id: canvas.id,
-                name: canvas.name,
-                creationDate: parseISO(canvas.creation_date),
-                lastEditDate: parseISO(canvas.last_edit_date),
+                ...canvas,
+                creationDate: parseISO(canvas.creationDate),
+                lastEditDate: parseISO(canvas.lastEditDate),
               },
             })
           ),

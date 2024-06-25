@@ -13,9 +13,9 @@ import { TokenData } from './token-data.model';
 
 
 export interface Token { 
-    access_token: string;
-    token_type: string;
-    expires_at: string;
-    token_data: TokenData;
+    accessToken: string;
+    tokenType: string;
+    expiresAt: string;
+    tokenData: TokenData;
 }
 
