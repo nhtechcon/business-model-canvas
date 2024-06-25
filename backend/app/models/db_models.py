@@ -2,10 +2,11 @@
 This module contains the database models based on sqlalchemy
 """
 
+import uuid
 from datetime import datetime, UTC
 from functools import partial
 
-from sqlalchemy import ForeignKey, Enum, DateTime
+from sqlalchemy import ForeignKey, Enum, String
 from sqlalchemy.orm import declarative_base, Mapped, mapped_column, relationship
 
 from models.common_models import BmcEntity
@@ -42,8 +43,8 @@ class DB_Canvas(Base):
 
     __tablename__ = "canvas"
 
-    id: Mapped[int] = mapped_column(
-        primary_key=True, autoincrement=True, index=True
+    id: Mapped[str] = mapped_column(
+        String, primary_key=True, index=True, default=lambda: str(uuid.uuid4())
     )
     name: Mapped[str] = mapped_column(index=True)
     creation_date: Mapped[datetime] = mapped_column(

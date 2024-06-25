@@ -48,7 +48,7 @@ class User(UserBase):
 
 
 class Canvas(BaseModel):
-    id: int
+    id: str
     name: str
     creation_date: datetime
     last_edit_date: datetime
