@@ -22,7 +22,9 @@ export class AuthService {
     private authApi: ApiAuthService,
     private userApi: UserService,
     private canvasApi: CanvasService
-  ) {}
+  ) {
+    this.injectTokenOnStartup();
+  }
 
   /**
    * Performs login. If successful, stores token in local storage and injects
@@ -61,7 +63,7 @@ export class AuthService {
   /**
    * Removes token information from local storage.
    */
-  logout() {
+  public logout() {
     localStorage.removeItem(this.KEY_ACCESS_TOKEN);
     localStorage.removeItem(this.KEY_EXPIRES_AT);
     localStorage.removeItem(this.KEY_TOKEN_INFO);
@@ -75,5 +77,21 @@ export class AuthService {
     if (!expiresAt) return false;
 
     return isBefore(new Date(), parseISO(expiresAt));
+  }
+
+  /**
+   * Reads the token from local storage, and injects it into the api services.
+   */
+  private injectTokenOnStartup() {
+    if (!this.isLoggedIn()) {
+      this.logout();
+      return;
+    }
+    const token = localStorage.getItem(this.KEY_ACCESS_TOKEN);
+    if (!token) {
+      this.logout();
+    } else {
+      this.injectToken(token);
+    }
   }
 }
