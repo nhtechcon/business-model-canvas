@@ -38,7 +38,7 @@ async def get_current_user(
 
 
 async def can_user_access_canvas(
-    canvas_id: int,
+    canvas_id: str,
     current_user: api_models.User = Depends(get_current_user),
     db_session: AsyncSession = Depends(get_db),
 ) -> db_models.DB_UserCanvas:

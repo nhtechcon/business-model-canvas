@@ -85,7 +85,7 @@ async def get_canvases_created_by_user(
 
 
 async def get_user_canvas(
-    db_session: AsyncSession, user_id: int, canvas_id: int
+    db_session: AsyncSession, user_id: int, canvas_id: str
 ) -> DB_Canvas:
     canvas = (
         await db_session.scalars(
@@ -130,7 +130,7 @@ async def create_canvas(
 
 
 async def get_canvas_entries(
-    db_session: AsyncSession, canvas_id: int
+    db_session: AsyncSession, canvas_id: str
 ) -> list[DB_BmcEntry]:
 
     entries = (

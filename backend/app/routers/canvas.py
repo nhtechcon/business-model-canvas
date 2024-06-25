@@ -51,8 +51,8 @@ async def create_canvas(
     response_model=list[api_models.BmcEntry],
     tags=["canvas"],
 )
-def get_canvas_entries(
-    canvas_id: int,
+async def get_canvas_entries(
+    canvas_id: str,
     canvas: db_models.DB_Canvas = Depends(can_user_access_canvas),
 ):
     """Returns all canvas entries for the canvas if the user can access it."""
