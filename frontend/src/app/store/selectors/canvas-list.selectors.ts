@@ -11,6 +11,14 @@ export const selectAllCanvases = createSelector(
   (state: CanvasListState) => state.canvases
 );
 
+export const selectAllCanvasesSorted = createSelector(
+  selectCanvasListState,
+  (state: CanvasListState) =>
+    [...state.canvases].sort(
+      (a, b) => b.lastEditDate.getTime() - a.lastEditDate.getTime()
+    )
+);
+
 export const selectLoadingState = createSelector(
   selectCanvasListState,
   (state: CanvasListState) => state.loadingState
