@@ -59,15 +59,7 @@ async def get_canvas(
     if not canvas:
         raise HTTPException(status_code=404, detail="Canvas not found")
 
-    entries = canvas.entries
-
-    return api_models.FullCanvas(
-        id=canvas.id,
-        name=canvas.name,
-        creation_date=canvas.creation_date,
-        last_edit_date=canvas.last_edit_date,
-        entries=entries,
-    )
+    return canvas
 
 
 @router.get(
@@ -84,3 +76,29 @@ async def get_canvas_entries(
         raise HTTPException(status_code=404, detail="Canvas not found")
 
     return canvas.entries
+
+
+@router.post(
+    "/canvas/{canvas_id}/entries",
+    response_model=api_models.BmcEntry,
+    tags=["canvas"],
+)
+async def post_canvas_entry(
+    canvas_id: str,
+    req: api_models.CreateEntryRequest,
+    canvas: db_models.DB_Canvas = Depends(can_user_access_canvas),
+    current_user: api_models.User = Depends(get_current_user),
+    db_session: AsyncSession = Depends(get_db),
+):
+    """Creates a new entry in the given canvas, if the user can access it."""
+
+    if not canvas:
+        raise HTTPException(status_code=404, detail="Canvas not found")
+
+    await db_session.close()
+
+    new_entry = await db_client.create_canvas_entry(
+        db_session, canvas_id, req.entity, current_user.id
+    )
+
+    return new_entry

@@ -87,7 +87,9 @@ class DB_BmcEntry(Base):
         onupdate=partial(datetime.now, tz=UTC),
     )
     entity: Mapped[BmcEntity] = mapped_column(Enum(BmcEntity))
-    canvas_id: Mapped[str] = mapped_column(ForeignKey("canvas.id"))
+    canvas_id: Mapped[str] = mapped_column(
+        ForeignKey("canvas.id"), nullable=False
+    )
     creator_id: Mapped[int] = mapped_column(ForeignKey("users.id"))
 
     canvas = relationship("DB_Canvas", back_populates="entries")

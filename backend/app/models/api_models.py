@@ -3,8 +3,9 @@ This module contains the api models based on pydantic
 """
 
 from datetime import datetime
+from typing_extensions import Annotated
 
-from pydantic import BaseModel, ConfigDict, EmailStr
+from pydantic import BaseModel, EmailStr
 from humps import camelize
 
 from models.common_models import BmcEntity
@@ -14,6 +15,8 @@ class ApiBaseModel(BaseModel):
     class Config:
         alias_generator = camelize
         populate_by_name = True
+        from_attributes = True
+        extra = "ignore"
 
 
 class LoginRequest(ApiBaseModel):
@@ -29,16 +32,12 @@ class RegistrationRequest(ApiBaseModel):
 
 
 class TokenData(ApiBaseModel):
-    model_config = ConfigDict(extra="ignore")
-
     id: int
     username: str | None = None
     email: EmailStr
 
 
 class Token(ApiBaseModel):
-    model_config = ConfigDict(extra="ignore")
-
     access_token: str
     token_type: str
     expires_at: datetime
@@ -81,3 +80,7 @@ class BmcEntry(ApiBaseModel):
 
 class FullCanvas(Canvas, ApiBaseModel):
     entries: list[BmcEntry]
+
+
+class CreateEntryRequest(ApiBaseModel):
+    entity: BmcEntity

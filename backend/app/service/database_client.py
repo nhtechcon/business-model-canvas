@@ -16,6 +16,7 @@ from models.db_models import (
     DB_UserCanvas,
     DB_BmcEntry,
 )
+from models.common_models import BmcEntity
 
 
 DATABASE_URL = "sqlite+aiosqlite:///./data.sqlite"
@@ -142,3 +143,23 @@ async def get_canvas_entries(
     ).all()
 
     return entries or []
+
+
+async def create_canvas_entry(
+    db_session: AsyncSession, canvas_id: str, entity: BmcEntity, creator_id: int
+) -> DB_BmcEntry:
+
+    new_entry = DB_BmcEntry(
+        text="", entity=entity, canvas_id=canvas_id, creator_id=creator_id
+    )
+
+    try:
+        async with db_session.begin():
+            db_session.add(new_entry)
+            await db_session.flush()
+            await db_session.refresh(new_entry)
+        return new_entry
+
+    except Exception as exc:
+        await db_session.rollback()
+        raise exc
