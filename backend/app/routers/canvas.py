@@ -2,7 +2,7 @@
 The api routes for retrieving and editing business model canvas data.
 """
 
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Response
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from dependencies.auth import get_current_user, can_user_access_canvas
@@ -117,8 +117,35 @@ async def put_canvas_entry(
 
     await db_session.close()
 
-    result = await db_client.update_canvas_entry(
-        db_session, canvas_id, req.id, req.text
-    )
+    try:
+        result = await db_client.update_canvas_entry(
+            db_session, canvas_id, req.id, req.text
+        )
+    except ValueError as e:
+        raise HTTPException(status_code=404, detail=str(e))
 
     return result
+
+
+@router.delete(
+    "/canvas/{canvas_id}/entries/{entry_id}",
+    tags=["canvas"],
+    status_code=204,
+)
+async def delete_canvas_entry(
+    canvas_id: str,
+    entry_id: int,
+    _: db_models.DB_Canvas = Depends(can_user_access_canvas),
+    __: api_models.User = Depends(get_current_user),
+    db_session: AsyncSession = Depends(get_db),
+):
+    """Deletes an entry from the given canvas, if the user can access it."""
+
+    await db_session.close()
+
+    try:
+        await db_client.delete_canvas_entry(db_session, canvas_id, entry_id)
+    except ValueError as e:
+        raise HTTPException(status_code=404, detail=str(e))
+
+    return Response(status_code=204)
