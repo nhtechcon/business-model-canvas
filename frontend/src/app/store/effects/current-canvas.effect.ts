@@ -77,6 +77,27 @@ export class CurrentCanvasEffects {
     { dispatch: false }
   );
 
+  updateEntry$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(CurrentCanvasActions.updateEntryText),
+        concatLatestFrom(_ => this.store.select(selectCurrentCanvas)),
+        concatMap(([action, currentCanvas]) =>
+          this.canvasService
+            .putCanvasEntryApiCanvasCanvasIdEntriesPut(currentCanvas.id, {
+              id: action.id,
+              text: action.text,
+            })
+            .pipe(
+              catchError(_ => {
+                return EMPTY;
+              })
+            )
+        )
+      ),
+    { dispatch: false }
+  );
+
   constructor(
     private actions$: Actions,
     private canvasService: CanvasService,
