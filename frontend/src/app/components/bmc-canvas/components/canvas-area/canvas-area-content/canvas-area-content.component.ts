@@ -44,7 +44,7 @@ export class CanvasAreaContentComponent implements AfterViewInit {
     this.store.dispatch(
       addEntry({
         entry: {
-          id: uuidv4(),
+          id: new Date().getTime(),
           date: new Date(),
           lastUpdated: new Date(),
           entity: this.entityId,
@@ -66,7 +66,7 @@ export class CanvasAreaContentComponent implements AfterViewInit {
     this.draggedNote = null;
   }
 
-  noteValueChanged(id: string, text: string) {
+  noteValueChanged(id: number, text: string) {
     this.store.dispatch(updateEntryText({ id, text }));
   }
 }

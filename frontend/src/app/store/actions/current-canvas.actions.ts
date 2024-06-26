@@ -26,3 +26,8 @@ export const updateEntryText = createAction(
   "[current-canvas] updateEntryText",
   props<{ id: number; text: string }>()
 );
+
+export const updateEntryId = createAction(
+  "[current-canvas] updateEntryId",
+  props<{ oldId: number; newId: number }>()
+);

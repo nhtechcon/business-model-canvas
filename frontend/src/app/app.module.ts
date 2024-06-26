@@ -28,6 +28,7 @@ import { PageRegisterComponent } from "./pages/page-register/page-register.compo
 import { environment } from "src/environments/environment";
 import { EffectsModule, provideEffects } from "@ngrx/effects";
 import { CanvasListEffects } from "./store/effects/canvas-list.effect";
+import { CurrentCanvasEffects } from "./store/effects/current-canvas.effect";
 
 @NgModule({
   declarations: [
@@ -66,7 +67,7 @@ import { CanvasListEffects } from "./store/effects/canvas-list.effect";
     ApiModule.forRoot(
       () => new Configuration({ basePath: environment.apiUrl })
     ),
-    EffectsModule.forRoot([CanvasListEffects]),
+    EffectsModule.forRoot([CanvasListEffects, CurrentCanvasEffects]),
   ],
   providers: [
     provideStore({
@@ -77,7 +78,7 @@ import { CanvasListEffects } from "./store/effects/canvas-list.effect";
       maxAge: 25,
       logOnly: !isDevMode(),
     }),
-    provideEffects([CanvasListEffects]),
+    provideEffects([CanvasListEffects, CurrentCanvasEffects]),
   ],
   bootstrap: [AppComponent],
 })

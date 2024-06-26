@@ -45,5 +45,11 @@ export const currentCanvasReducer = createReducer(
       entry.id === id ? { ...entry, text } : entry
     );
     return newState;
-  })
+  }),
+  on(CurrentCanvasActions.updateEntryId, (state, { oldId, newId }) => ({
+    ...state,
+    entries: state.entries.map(entry =>
+      entry.id === oldId ? { ...entry, id: newId } : entry
+    ),
+  }))
 );
