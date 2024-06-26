@@ -163,3 +163,21 @@ async def create_canvas_entry(
     except Exception as exc:
         await db_session.rollback()
         raise exc
+
+
+async def update_canvas_entry(
+    db_session: AsyncSession, canvas_id: str, entry_id: int, text: str
+) -> DB_BmcEntry:
+
+    result = await db_session.execute(
+        select(DB_BmcEntry).filter_by(id=entry_id, canvas_id=canvas_id)
+    )
+    entry = result.scalar_one_or_none()
+
+    if entry:
+        entry.text = text
+        await db_session.commit()
+        await db_session.refresh(entry)
+        return entry
+    else:
+        raise ValueError("Entry not found")

@@ -84,3 +84,8 @@ class FullCanvas(Canvas, ApiBaseModel):
 
 class CreateEntryRequest(ApiBaseModel):
     entity: BmcEntity
+
+
+class UpdateEntryRequest(ApiBaseModel):
+    id: int
+    text: str
