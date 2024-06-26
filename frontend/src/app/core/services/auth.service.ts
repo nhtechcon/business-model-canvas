@@ -36,7 +36,7 @@ export class AuthService {
       .pipe(
         tap(tokenInfo => {
           this.setSession(tokenInfo);
-          this.injectToken(tokenInfo.access_token);
+          this.injectToken(tokenInfo.accessToken);
         })
       );
   }
@@ -46,8 +46,8 @@ export class AuthService {
    */
   private setSession(tokenInfo: Token) {
     localStorage.setItem(this.KEY_TOKEN_INFO, JSON.stringify(tokenInfo));
-    localStorage.setItem(this.KEY_ACCESS_TOKEN, tokenInfo.access_token);
-    localStorage.setItem(this.KEY_EXPIRES_AT, tokenInfo.expires_at);
+    localStorage.setItem(this.KEY_ACCESS_TOKEN, tokenInfo.accessToken);
+    localStorage.setItem(this.KEY_EXPIRES_AT, tokenInfo.expiresAt);
   }
 
   /**
