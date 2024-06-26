@@ -12,7 +12,8 @@ import { ButtonModule } from "primeng/button";
 import { Note } from "src/app/core/models/note.model";
 import { Store } from "@ngrx/store";
 import { deleteEntry } from "src/app/store/actions/current-canvas.actions";
-import { Subject, debounceTime } from "rxjs";
+import { Subject, debounceTime, takeUntil } from "rxjs";
+import { BaseComponent } from "src/app/components/base.component";
 
 @Component({
   selector: "app-note-card",
@@ -21,7 +22,7 @@ import { Subject, debounceTime } from "rxjs";
   templateUrl: "./note-card.component.html",
   styleUrls: ["./note-card.component.scss"],
 })
-export class NoteCardComponent implements OnChanges {
+export class NoteCardComponent extends BaseComponent implements OnChanges {
   @Input()
   note?: Note;
 
@@ -39,9 +40,11 @@ export class NoteCardComponent implements OnChanges {
   private keyupSubject = new Subject<string>();
 
   constructor(private store: Store) {
+    super();
+
     this.keyupSubject
-      .pipe(debounceTime(300))
-      .subscribe(value => this.valueChanged.emit(this.textModel));
+      .pipe(debounceTime(300), takeUntil(this.destroy$))
+      .subscribe(_ => this.valueChanged.emit(this.textModel));
   }
 
   ngOnChanges(changes: SimpleChanges): void {

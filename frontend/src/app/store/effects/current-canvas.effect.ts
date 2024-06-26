@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { EMPTY } from "rxjs";
-import { catchError, map, switchMap, tap } from "rxjs/operators";
+import { catchError, concatMap, map, switchMap, tap } from "rxjs/operators";
 import * as CurrentCanvasActions from "../actions/current-canvas.actions";
 import { CanvasService } from "src/app/core/services/api-client";
 import { ToastService } from "src/app/core/services/toast.service";
@@ -16,7 +16,7 @@ export class CurrentCanvasEffects {
       this.actions$.pipe(
         ofType(CurrentCanvasActions.addEntry),
         concatLatestFrom(_ => this.store.select(selectCurrentCanvas)),
-        switchMap(([{ entry }, currentCanvas]) =>
+        concatMap(([{ entry }, currentCanvas]) =>
           this.canvasService
             .postCanvasEntryApiCanvasCanvasIdEntriesPost(currentCanvas.id, {
               entity: entry.entity,
@@ -34,6 +34,39 @@ export class CurrentCanvasEffects {
                 this.toast.showToast({
                   severity: "error",
                   summary: "Could not create the note :(",
+                  detail: "Please try again.",
+                });
+                return EMPTY;
+              })
+            )
+        )
+      ),
+    { dispatch: false }
+  );
+
+  deleteEntry$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(CurrentCanvasActions.deleteEntry),
+        concatLatestFrom(_ => this.store.select(selectCurrentCanvas)),
+        concatMap(([action, currentCanvas]) =>
+          this.canvasService
+            .deleteCanvasEntryApiCanvasCanvasIdEntriesEntryIdDelete(
+              currentCanvas.id,
+              action.id
+            )
+            .pipe(
+              tap(() =>
+                this.toast.showToast({
+                  severity: "success",
+                  summary: "Success",
+                  detail: "Note has been deleted.",
+                })
+              ),
+              catchError(_ => {
+                this.toast.showToast({
+                  severity: "error",
+                  summary: "Could not delete the note :(",
                   detail: "Please try again.",
                 });
                 return EMPTY;
