@@ -25,9 +25,13 @@ import { Canvas } from '../model/canvas.model';
 // @ts-ignore
 import { CreateCanvasRequest } from '../model/create-canvas-request.model';
 // @ts-ignore
+import { CreateEntryRequest } from '../model/create-entry-request.model';
+// @ts-ignore
 import { FullCanvas } from '../model/full-canvas.model';
 // @ts-ignore
 import { HTTPValidationError } from '../model/http-validation-error.model';
+// @ts-ignore
+import { UpdateEntryRequest } from '../model/update-entry-request.model';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -364,6 +368,166 @@ export class CanvasService implements CanvasServiceInterface {
         return this.httpClient.request<Array<Canvas>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Post Canvas Entry
+     * Creates a new entry in the given canvas, if the user can access it.
+     * @param canvasId 
+     * @param createEntryRequest 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public postCanvasEntryApiCanvasCanvasIdEntriesPost(canvasId: string, createEntryRequest: CreateEntryRequest, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<BmcEntry>;
+    public postCanvasEntryApiCanvasCanvasIdEntriesPost(canvasId: string, createEntryRequest: CreateEntryRequest, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<BmcEntry>>;
+    public postCanvasEntryApiCanvasCanvasIdEntriesPost(canvasId: string, createEntryRequest: CreateEntryRequest, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<BmcEntry>>;
+    public postCanvasEntryApiCanvasCanvasIdEntriesPost(canvasId: string, createEntryRequest: CreateEntryRequest, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        if (canvasId === null || canvasId === undefined) {
+            throw new Error('Required parameter canvasId was null or undefined when calling postCanvasEntryApiCanvasCanvasIdEntriesPost.');
+        }
+        if (createEntryRequest === null || createEntryRequest === undefined) {
+            throw new Error('Required parameter createEntryRequest was null or undefined when calling postCanvasEntryApiCanvasCanvasIdEntriesPost.');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarCredential: string | undefined;
+        // authentication (OAuth2PasswordBearer) required
+        localVarCredential = this.configuration.lookupCredential('OAuth2PasswordBearer');
+        if (localVarCredential) {
+            localVarHeaders = localVarHeaders.set('Authorization', 'Bearer ' + localVarCredential);
+        }
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                'application/json'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Content-Type', httpContentTypeSelected);
+        }
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/api/canvas/${this.configuration.encodeParam({name: "canvasId", value: canvasId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/entries`;
+        return this.httpClient.request<BmcEntry>('post', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
+                body: createEntryRequest,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Put Canvas Entry
+     * Creates a new entry in the given canvas, if the user can access it.
+     * @param canvasId 
+     * @param updateEntryRequest 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public putCanvasEntryApiCanvasCanvasIdEntriesPut(canvasId: string, updateEntryRequest: UpdateEntryRequest, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<BmcEntry>;
+    public putCanvasEntryApiCanvasCanvasIdEntriesPut(canvasId: string, updateEntryRequest: UpdateEntryRequest, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<BmcEntry>>;
+    public putCanvasEntryApiCanvasCanvasIdEntriesPut(canvasId: string, updateEntryRequest: UpdateEntryRequest, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<BmcEntry>>;
+    public putCanvasEntryApiCanvasCanvasIdEntriesPut(canvasId: string, updateEntryRequest: UpdateEntryRequest, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        if (canvasId === null || canvasId === undefined) {
+            throw new Error('Required parameter canvasId was null or undefined when calling putCanvasEntryApiCanvasCanvasIdEntriesPut.');
+        }
+        if (updateEntryRequest === null || updateEntryRequest === undefined) {
+            throw new Error('Required parameter updateEntryRequest was null or undefined when calling putCanvasEntryApiCanvasCanvasIdEntriesPut.');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarCredential: string | undefined;
+        // authentication (OAuth2PasswordBearer) required
+        localVarCredential = this.configuration.lookupCredential('OAuth2PasswordBearer');
+        if (localVarCredential) {
+            localVarHeaders = localVarHeaders.set('Authorization', 'Bearer ' + localVarCredential);
+        }
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                'application/json'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Content-Type', httpContentTypeSelected);
+        }
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/api/canvas/${this.configuration.encodeParam({name: "canvasId", value: canvasId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/entries`;
+        return this.httpClient.request<BmcEntry>('put', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
+                body: updateEntryRequest,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,

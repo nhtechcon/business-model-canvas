@@ -16,8 +16,10 @@ import { Observable }                                        from 'rxjs';
 import { BmcEntry } from '../model/models';
 import { Canvas } from '../model/models';
 import { CreateCanvasRequest } from '../model/models';
+import { CreateEntryRequest } from '../model/models';
 import { FullCanvas } from '../model/models';
 import { HTTPValidationError } from '../model/models';
+import { UpdateEntryRequest } from '../model/models';
 
 
 import { Configuration }                                     from '../configuration';
@@ -54,5 +56,21 @@ export interface CanvasServiceInterface {
      * Returns all canvases a user has created.
      */
     getUserCanvasesApiUserCanvasesGet(extraHttpRequestParams?: any): Observable<Array<Canvas>>;
+
+    /**
+     * Post Canvas Entry
+     * Creates a new entry in the given canvas, if the user can access it.
+     * @param canvasId 
+     * @param createEntryRequest 
+     */
+    postCanvasEntryApiCanvasCanvasIdEntriesPost(canvasId: string, createEntryRequest: CreateEntryRequest, extraHttpRequestParams?: any): Observable<BmcEntry>;
+
+    /**
+     * Put Canvas Entry
+     * Creates a new entry in the given canvas, if the user can access it.
+     * @param canvasId 
+     * @param updateEntryRequest 
+     */
+    putCanvasEntryApiCanvasCanvasIdEntriesPut(canvasId: string, updateEntryRequest: UpdateEntryRequest, extraHttpRequestParams?: any): Observable<BmcEntry>;
 
 }

@@ -17,6 +17,7 @@ model/bmc-entity.model.ts
 model/bmc-entry.model.ts
 model/canvas.model.ts
 model/create-canvas-request.model.ts
+model/create-entry-request.model.ts
 model/full-canvas.model.ts
 model/http-validation-error.model.ts
 model/login-request.model.ts
@@ -24,6 +25,7 @@ model/models.ts
 model/registration-request.model.ts
 model/token-data.model.ts
 model/token.model.ts
+model/update-entry-request.model.ts
 model/user.model.ts
 model/validation-error-loc-inner.model.ts
 model/validation-error.model.ts
