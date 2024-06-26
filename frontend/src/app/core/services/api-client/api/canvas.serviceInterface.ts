@@ -38,6 +38,14 @@ export interface CanvasServiceInterface {
     createCanvasApiCanvasPost(createCanvasRequest: CreateCanvasRequest, extraHttpRequestParams?: any): Observable<Canvas>;
 
     /**
+     * Delete Canvas Entry
+     * Deletes an entry from the given canvas, if the user can access it.
+     * @param canvasId 
+     * @param entryId 
+     */
+    deleteCanvasEntryApiCanvasCanvasIdEntriesEntryIdDelete(canvasId: string, entryId: number, extraHttpRequestParams?: any): Observable<{}>;
+
+    /**
      * Get Canvas
      * Returns the full canvas, with info and entries.
      * @param canvasId 
