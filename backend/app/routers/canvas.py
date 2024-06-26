@@ -113,7 +113,7 @@ async def put_canvas_entry(
     __: api_models.User = Depends(get_current_user),
     db_session: AsyncSession = Depends(get_db),
 ):
-    """Creates a new entry in the given canvas, if the user can access it."""
+    """Updates entry in the given canvas, if the user can access it."""
 
     await db_session.close()
 
