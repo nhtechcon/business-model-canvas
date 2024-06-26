@@ -15,7 +15,10 @@ import { ToolbarComponent } from "./components/toolbar/toolbar.component";
 import { SidebarComponent } from "./components/sidebar/sidebar.component";
 import { StoreModule, provideStore } from "@ngrx/store";
 import { currentCanvasReducer } from "./store/reducers/current-canvas.reducer";
-import { StoreDevtoolsModule } from "@ngrx/store-devtools";
+import {
+  StoreDevtoolsModule,
+  provideStoreDevtools,
+} from "@ngrx/store-devtools";
 import { PageLoginComponent } from "./pages/page-login/page-login.component";
 import { PageOverviewComponent } from "./pages/page-overview/page-overview.component";
 import { LogoComponent } from "./components/logo/logo.component";
@@ -69,6 +72,10 @@ import { CanvasListEffects } from "./store/effects/canvas-list.effect";
     provideStore({
       currentCanvas: currentCanvasReducer,
       canvasList: canvasListReducer,
+    }),
+    provideStoreDevtools({
+      maxAge: 25,
+      logOnly: !isDevMode(),
     }),
     provideEffects([CanvasListEffects]),
   ],
