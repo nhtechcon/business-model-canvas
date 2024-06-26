@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, Output } from "@angular/core";
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  Output,
+  SimpleChanges,
+} from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { DragDropModule } from "primeng/dragdrop";
 import { ButtonModule } from "primeng/button";
@@ -13,7 +20,7 @@ import { deleteEntry } from "src/app/store/actions/current-canvas.actions";
   templateUrl: "./note-card.component.html",
   styleUrls: ["./note-card.component.scss"],
 })
-export class NoteCardComponent {
+export class NoteCardComponent implements OnChanges {
   @Input()
   note?: Note;
 
@@ -29,6 +36,10 @@ export class NoteCardComponent {
   textModel = "";
 
   constructor(private store: Store) {}
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.textModel = changes["note"].currentValue["text"];
+  }
 
   protected onDeleteClick(event: Event) {
     event.stopImmediatePropagation();
