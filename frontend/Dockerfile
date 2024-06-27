@@ -5,13 +5,13 @@ FROM node:20-alpine3.20
 WORKDIR /app
 
 # Copy the package.json and package-lock.json files
-COPY package*.json .
+COPY app/package*.json .
 
 # Install any dependencies
 RUN npm install
 
 # Copy the rest of the application code
-COPY . /app
+COPY ./app /app
 
 # Build the Angular application
 RUN npm run build --prod
@@ -20,7 +20,11 @@ RUN npm run build --prod
 FROM nginx:alpine
 
 # Copy the built Angular application into the Nginx directory
-COPY --from=0 /app/dist /usr/share/nginx/html
+COPY --from=0 /app/dist/business-model-canvas/browser /usr/share/nginx/html
+
+# Copy nginx config
+COPY nginx/nginx.conf /etc/nginx/nginx.conf
+COPY nginx/security-headers.conf /etc/nginx/security-headers.conf
 
 # Expose port 80
 EXPOSE 80
