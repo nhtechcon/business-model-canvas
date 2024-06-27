@@ -10,7 +10,7 @@ import { AppComponent } from "./app.component";
 import { PrimeNGComponentsModule } from "./primeng-components.module";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BmcCanvasComponent } from "./components/bmc-canvas/bmc-canvas.component";
-import { PageMainComponent } from "./pages/page-main/page-main.component";
+import { PageEditorComponent } from "./pages/page-editor/page-editor.component";
 import { ToolbarComponent } from "./components/toolbar/toolbar.component";
 import { SidebarComponent } from "./components/sidebar/sidebar.component";
 import { StoreModule, provideStore } from "@ngrx/store";
@@ -33,7 +33,7 @@ import { CurrentCanvasEffects } from "./store/effects/current-canvas.effect";
 @NgModule({
   declarations: [
     AppComponent,
-    PageMainComponent,
+    PageEditorComponent,
     PageLoginComponent,
     PageOverviewComponent,
     PageRegisterComponent,

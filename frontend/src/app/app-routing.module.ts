@@ -1,6 +1,6 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { PageMainComponent } from "./pages/page-main/page-main.component";
+import { PageEditorComponent } from "./pages/page-editor/page-editor.component";
 import { PageLoginComponent } from "./pages/page-login/page-login.component";
 import { PageOverviewComponent } from "./pages/page-overview/page-overview.component";
 import { PageRegisterComponent } from "./pages/page-register/page-register.component";
@@ -25,7 +25,7 @@ const routes: Routes = [
       },
       {
         path: "canvas/:id",
-        component: PageMainComponent,
+        component: PageEditorComponent,
       },
       {
         path: "",
