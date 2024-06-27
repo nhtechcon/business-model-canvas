@@ -12,6 +12,8 @@ The purpose is to showcase the usage of...
 - [FastAPI](https://fastapi.tiangolo.com/) as a REST API framework
 - [SQLAlchemy](https://www.sqlalchemy.org/) as an object relational mapper
 - Code generation of API client using [openapi-generator-cli](https://www.npmjs.com/package/@openapitools/openapi-generator-cli)
+- Proper build of [Docker](https://hub.docker.com/) images for both backend and frontend
+- Proper [nginx](https://nginx.org/) configuration for serving the frontend
 
 ## Update generated API code
 
