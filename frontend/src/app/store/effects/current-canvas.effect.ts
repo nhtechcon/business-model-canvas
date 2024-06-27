@@ -47,6 +47,29 @@ export class CurrentCanvasEffects {
     )
   );
 
+  updateCanvasName$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(CurrentCanvasActions.setCanvasName),
+        concatLatestFrom(_ => this.store.select(selectCurrentCanvas)),
+        switchMap(([{ name }, currentCanvas]) =>
+          this.canvasService
+            .putCanvasUpdateApiCanvasCanvasIdPut(currentCanvas.id, { name })
+            .pipe(
+              catchError(_ => {
+                this.toast.showToast({
+                  severity: "error",
+                  summary: "Could not update the name :(",
+                  detail: "Please try again.",
+                });
+                return EMPTY;
+              })
+            )
+        )
+      ),
+    { dispatch: false }
+  );
+
   createEntry$ = createEffect(
     () =>
       this.actions$.pipe(
