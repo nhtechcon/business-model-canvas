@@ -19,7 +19,7 @@ from models.db_models import (
 from models.common_models import BmcEntity
 
 
-DATABASE_URL = "sqlite+aiosqlite:///./data.sqlite"
+DATABASE_URL = "sqlite+aiosqlite:///./db/data.sqlite"
 
 engine = create_async_engine(DATABASE_URL)
 
