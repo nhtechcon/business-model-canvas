@@ -1,6 +1,18 @@
 <div class="toolbar shadow-2">
-  <p-toolbar [style]="{ 'border-radius': '2rem' }">
+  <p-toolbar [style]="{ 'border-radius': '2rem', background: '#fff' }">
     <div class="p-toolbar-group-start">
+      <p-button
+        size="small"
+        [text]="true"
+        severity="contrast"
+        [link]="true"
+        class="mr-3"
+        routerLink="/main"
+      >
+        <i class="pi pi-chevron-left text-sm mr-3"></i>
+        <i class="pi pi-home text-lg"></i>
+      </p-button>
+
       <!-- in-place editable name -->
       <p-inplace closable="closable" closeIcon="pi pi-check" (onDeactivate)="onRename()">
         <ng-template pTemplate="display">
@@ -14,12 +26,9 @@
     </div>
     <div class="p-toolbar-group-center"></div>
     <div class="p-toolbar-group-end">
-      <button
-        class="p-link inline-flex justify-content-center align-items-center h-3rem w-3rem border-circle hover:bg-white-alpha-10 transition-all transition-duration-200"
-        (click)="toggleInfoText()"
-      >
+      <p-button size="small" [text]="true" severity="contrast" (click)="toggleInfoText()">
         <i class="pi pi-question-circle text-2xl"></i>
-      </button>
+      </p-button>
     </div>
   </p-toolbar>
 </div>
