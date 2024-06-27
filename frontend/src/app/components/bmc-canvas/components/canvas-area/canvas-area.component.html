@@ -7,6 +7,11 @@
   </div>
 
   <div class="content-area">
-    <app-canvas-area-content [entityId]="entityId"></app-canvas-area-content>
+    <app-canvas-area-content
+      [entityId]="entityId"
+      (noteDragStart)="noteDragStart.emit($event)"
+      (noteDragEnd)="noteDragEnd.emit($event)"
+      (noteDropped)="noteDropped.emit($event)"
+    ></app-canvas-area-content>
   </div>
 </div>

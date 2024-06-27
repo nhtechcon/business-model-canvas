@@ -1,13 +1,19 @@
-import { AfterViewInit, Component, Input, inject } from "@angular/core";
+import {
+  AfterViewInit,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  inject,
+} from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { v4 as uuidv4 } from "uuid";
 import { NoteCardComponent } from "../../note-card/note-card.component";
 import { DragDropModule } from "primeng/dragdrop";
 import { Note } from "src/app/core/models/note.model";
 import { BmcEntity, BmcEntry } from "src/app/core/models/bmc-entry.model";
 import { Store } from "@ngrx/store";
 import { selectEntityEntries } from "src/app/store/selectors/current-canvas.selectors";
-import { Observable, tap } from "rxjs";
+import { Observable } from "rxjs";
 import {
   addEntry,
   updateEntryText,
@@ -26,9 +32,16 @@ export class CanvasAreaContentComponent implements AfterViewInit {
   @Input()
   entityId!: BmcEntity;
 
-  notes$!: Observable<BmcEntry[]>;
+  @Output()
+  noteDragStart: EventEmitter<Note> = new EventEmitter();
 
-  draggedNote: Note | undefined | null;
+  @Output()
+  noteDragEnd: EventEmitter<Note> = new EventEmitter();
+
+  @Output()
+  noteDropped: EventEmitter<BmcEntity> = new EventEmitter();
+
+  notes$!: Observable<BmcEntry[]>;
 
   constructor() {}
 
@@ -52,18 +65,6 @@ export class CanvasAreaContentComponent implements AfterViewInit {
         },
       })
     );
-  }
-
-  dragStart(note: Note) {
-    this.draggedNote = note;
-  }
-
-  drop(elm: any) {
-    console.log("Dropped on ", this.entityId);
-  }
-
-  dragEnd(note: Note) {
-    this.draggedNote = null;
   }
 
   noteValueChanged(id: number, text: string) {

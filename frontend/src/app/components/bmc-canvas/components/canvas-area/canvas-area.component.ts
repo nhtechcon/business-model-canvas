@@ -4,9 +4,11 @@ import {
   ChangeDetectorRef,
   Component,
   ElementRef,
+  EventEmitter,
   HostListener,
   Input,
   OnInit,
+  Output,
 } from "@angular/core";
 import { CardModule } from "primeng/card";
 import {
@@ -16,6 +18,7 @@ import {
 import { GlobalUiStateService } from "src/app/core/services/global-ui-state.service";
 import { CanvasAreaContentComponent } from "./canvas-area-content/canvas-area-content.component";
 import { BmcEntity } from "src/app/core/models/bmc-entry.model";
+import { Note } from "src/app/core/models/note.model";
 
 @Component({
   selector: "app-canvas-area",
@@ -33,6 +36,15 @@ export class CanvasAreaComponent implements AfterViewInit, OnInit {
 
   @Input()
   description: string = "";
+
+  @Output()
+  noteDragStart: EventEmitter<Note> = new EventEmitter();
+
+  @Output()
+  noteDragEnd: EventEmitter<Note> = new EventEmitter();
+
+  @Output()
+  noteDropped: EventEmitter<BmcEntity> = new EventEmitter();
 
   protected isHorizontalLayout = false;
   protected isInfoVisible = false;

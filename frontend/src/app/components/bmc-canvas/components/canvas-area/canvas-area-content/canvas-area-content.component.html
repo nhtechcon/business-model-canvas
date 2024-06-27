@@ -1,9 +1,14 @@
-<div class="area-content" (click)="addNote()" pDroppable (onDrop)="drop($event)">
+<div
+  class="area-content"
+  (click)="addNote()"
+  pDroppable
+  (onDrop)="noteDropped.emit(entityId)"
+>
   <app-note-card
     *ngFor="let note of notes$ | async; trackBy: trackNote"
     [note]="note"
-    (dragStartHandler)="dragStart($event)"
-    (dragEndHandler)="dragEnd($event)"
+    (dragStartHandler)="noteDragStart.emit(note)"
+    (dragEndHandler)="noteDragEnd.emit(note)"
     (valueChanged)="noteValueChanged(note.id, $event)"
   ></app-note-card>
 </div>

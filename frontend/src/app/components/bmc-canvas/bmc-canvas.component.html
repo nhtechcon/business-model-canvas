@@ -5,5 +5,8 @@
     [entityId]="asEntity(entityKey)"
     name="{{ 'canvas.' + (entityKey | lowercase) + '.title' | translate }}"
     description="{{ 'canvas.' + (entityKey | lowercase) + '.description' | translate }}"
+    (noteDragStart)="noteDragStart($event)"
+    (noteDragEnd)="noteDragEnd($event)"
+    (noteDropped)="noteDropped($event)"
   ></app-canvas-area>
 </div>

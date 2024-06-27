@@ -1,5 +1,5 @@
 import { createAction, props } from "@ngrx/store";
-import { BmcEntry } from "src/app/core/models/bmc-entry.model";
+import { BmcEntity, BmcEntry } from "src/app/core/models/bmc-entry.model";
 import { BmcCanvas } from "src/app/core/models/bmc-canvas.model";
 import { LoadingState } from "../common";
 
@@ -36,6 +36,11 @@ export const updateEntryText = createAction(
 export const updateEntryId = createAction(
   "[current-canvas] updateEntryId",
   props<{ oldId: number; newId: number }>()
+);
+
+export const updateEntryEntity = createAction(
+  "[current-canvas] updateEntryEntity",
+  props<{ entryId: number; entity: BmcEntity }>()
 );
 
 export const setInitialLoadState = createAction(
