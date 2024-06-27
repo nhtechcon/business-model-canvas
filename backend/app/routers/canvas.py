@@ -84,6 +84,29 @@ async def put_canvas_update(
     return canvas
 
 
+@router.delete(
+    "/canvas/{canvas_id}",
+    tags=["canvas"],
+    status_code=204,
+)
+async def delete_canvas(
+    canvas_id: str,
+    _: db_models.DB_Canvas = Depends(can_user_access_canvas),
+    __: api_models.User = Depends(get_current_user),
+    db_session: AsyncSession = Depends(get_db),
+):
+    """Deletes an entry from the given canvas, if the user can access it."""
+
+    await db_session.close()
+
+    try:
+        await db_client.delete_canvas(db_session, canvas_id)
+    except ValueError as e:
+        raise HTTPException(status_code=404, detail=str(e))
+
+    return Response(status_code=204)
+
+
 @router.get(
     "/canvas/{canvas_id}/entries",
     response_model=list[api_models.BmcEntry],
