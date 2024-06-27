@@ -23,6 +23,27 @@
   font-size: 0.75rem;
 
   color: #130d6b;
+
+  // Customer-related cards have same color
+  &.relationships,
+  &.customersegments,
+  &.channels {
+    background-color: #6782ff;
+  }
+
+  // Finance related cards have same color
+  &.revenuestreams,
+  &.coststructure {
+    background-color: #b466c1;
+  }
+
+  // Rest has same color
+  &.partners,
+  &.activities,
+  &.resources,
+  &.propositions {
+    background-color: #c5f46e;
+  }
 }
 
 .action-buttons {

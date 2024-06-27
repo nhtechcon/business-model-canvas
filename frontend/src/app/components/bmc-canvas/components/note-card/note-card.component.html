@@ -7,6 +7,7 @@
 >
   <div
     class="post-it"
+    [ngClass]="note?.entity?.toLowerCase()"
     contenteditable
     [textContent]="textModel"
     (input)="onContentChanged($event)"
