@@ -131,9 +131,7 @@ async def create_canvas(
 
 
 async def delete_canvas(db_session: AsyncSession, canvas_id: str) -> None:
-    result = await db_session.execute(
-        select(DB_BmcEntry).filter_by(id=canvas_id)
-    )
+    result = await db_session.execute(select(DB_Canvas).filter_by(id=canvas_id))
     entry = result.scalar_one_or_none()
 
     if entry:
