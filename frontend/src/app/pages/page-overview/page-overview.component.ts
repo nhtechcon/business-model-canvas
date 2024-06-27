@@ -61,7 +61,7 @@ export class PageOverviewComponent implements OnDestroy {
             },
           })
         );
-        this.router.navigate(["/main/canvas"]);
+        this.router.navigate(["/main/canvas/" + canvas.id]);
       });
   }
 

@@ -44,9 +44,9 @@
                   label="Create a canvas"
                   icon="pi pi-plus"
                   severity="primary"
-                  routerLink="/main/canvas"
                   size="small"
                   class="white-space-nowrap"
+                  (click)="newCanvasDialogVisible = true"
                 />
               </div>
             </div>
@@ -64,9 +64,12 @@
   <p-button
     label="Create a canvas"
     icon="pi pi-plus"
-    severity="info"
+    severity="primary"
+    size="small"
+    class="white-space-nowrap"
     (click)="newCanvasDialogVisible = true"
   />
+</ng-template>
 
   <p-dialog
     header="Alright!"
