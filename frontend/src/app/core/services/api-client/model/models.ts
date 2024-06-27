@@ -9,6 +9,7 @@ export * from './login-request.model';
 export * from './registration-request.model';
 export * from './token.model';
 export * from './token-data.model';
+export * from './update-canvas-request.model';
 export * from './update-entry-request.model';
 export * from './user.model';
 export * from './validation-error.model';

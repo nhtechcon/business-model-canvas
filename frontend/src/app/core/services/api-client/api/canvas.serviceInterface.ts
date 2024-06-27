@@ -19,6 +19,7 @@ import { CreateCanvasRequest } from '../model/models';
 import { CreateEntryRequest } from '../model/models';
 import { FullCanvas } from '../model/models';
 import { HTTPValidationError } from '../model/models';
+import { UpdateCanvasRequest } from '../model/models';
 import { UpdateEntryRequest } from '../model/models';
 
 
@@ -75,10 +76,18 @@ export interface CanvasServiceInterface {
 
     /**
      * Put Canvas Entry
-     * Creates a new entry in the given canvas, if the user can access it.
+     * Updates entry in the given canvas, if the user can access it.
      * @param canvasId 
      * @param updateEntryRequest 
      */
     putCanvasEntryApiCanvasCanvasIdEntriesPut(canvasId: string, updateEntryRequest: UpdateEntryRequest, extraHttpRequestParams?: any): Observable<BmcEntry>;
+
+    /**
+     * Put Canvas Update
+     * Returns the updated canvas metadata.
+     * @param canvasId 
+     * @param updateCanvasRequest 
+     */
+    putCanvasUpdateApiCanvasCanvasIdPut(canvasId: string, updateCanvasRequest: UpdateCanvasRequest, extraHttpRequestParams?: any): Observable<Canvas>;
 
 }

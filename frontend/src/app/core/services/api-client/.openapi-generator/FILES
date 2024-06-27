@@ -25,6 +25,7 @@ model/models.ts
 model/registration-request.model.ts
 model/token-data.model.ts
 model/token.model.ts
+model/update-canvas-request.model.ts
 model/update-entry-request.model.ts
 model/user.model.ts
 model/validation-error-loc-inner.model.ts
