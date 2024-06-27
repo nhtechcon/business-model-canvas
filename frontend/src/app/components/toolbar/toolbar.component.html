@@ -2,7 +2,7 @@
   <p-toolbar [style]="{ 'border-radius': '2rem' }">
     <div class="p-toolbar-group-start">
       <!-- in-place editable name -->
-      <p-inplace closable="closable" closeIcon="pi-check" (onDeactivate)="onRename()">
+      <p-inplace closable="closable" closeIcon="pi pi-check" (onDeactivate)="onRename()">
         <ng-template pTemplate="display">
           <b class="font-bold">{{ name$ | async }}</b>
           <i class="pi pi-pencil text-sm ml-2"></i>
