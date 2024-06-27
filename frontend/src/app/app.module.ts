@@ -2,7 +2,7 @@ import { NgModule, isDevMode } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { TranslateLoader, TranslateModule } from "@ngx-translate/core";
-import { HttpClient, HttpClientModule } from "@angular/common/http";
+import { HttpClient, provideHttpClient, withInterceptorsFromDi } from "@angular/common/http";
 
 import { CustomTranslateLoader } from "./custom-translate-loader";
 import { AppRoutingModule } from "./app-routing.module";
@@ -30,56 +30,48 @@ import { CanvasListEffects } from "./store/effects/canvas-list.effect";
 import { CurrentCanvasEffects } from "./store/effects/current-canvas.effect";
 import { CanvasTableComponent } from "./components/canvas-table/canvas-table.component";
 
-@NgModule({
-  declarations: [
-    AppComponent,
-    PageEditorComponent,
-    PageLoginComponent,
-    PageOverviewComponent,
-    PageRegisterComponent,
-    ToolbarComponent,
-    LogoComponent,
-    CanvasTableComponent,
-  ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    TranslateModule.forRoot(),
-    HttpClientModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: (http: HttpClient) => new CustomTranslateLoader(http),
-        deps: [HttpClient],
-      },
-      defaultLanguage: "en",
-    }),
-    PrimeNGComponentsModule,
-    FormsModule,
-    AppRoutingModule,
-    BmcCanvasComponent,
-    StoreModule.forRoot({
-      canvasList: canvasListReducer,
-      currentCanvas: currentCanvasReducer,
-    }),
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
-    ReactiveFormsModule,
-    ApiModule.forRoot(
-      () => new Configuration({ basePath: environment.apiUrl })
-    ),
-    EffectsModule.forRoot([CanvasListEffects, CurrentCanvasEffects]),
-  ],
-  providers: [
-    provideStore({
-      currentCanvas: currentCanvasReducer,
-      canvasList: canvasListReducer,
-    }),
-    provideStoreDevtools({
-      maxAge: 25,
-      logOnly: !isDevMode(),
-    }),
-    provideEffects([CanvasListEffects, CurrentCanvasEffects]),
-  ],
-  bootstrap: [AppComponent],
-})
+@NgModule({ declarations: [
+        AppComponent,
+        PageEditorComponent,
+        PageLoginComponent,
+        PageOverviewComponent,
+        PageRegisterComponent,
+        ToolbarComponent,
+        LogoComponent,
+        CanvasTableComponent,
+    ],
+    bootstrap: [AppComponent], imports: [BrowserModule,
+        BrowserAnimationsModule,
+        TranslateModule.forRoot(),
+        TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: (http: HttpClient) => new CustomTranslateLoader(http),
+                deps: [HttpClient],
+            },
+            defaultLanguage: "en",
+        }),
+        PrimeNGComponentsModule,
+        FormsModule,
+        AppRoutingModule,
+        BmcCanvasComponent,
+        StoreModule.forRoot({
+            canvasList: canvasListReducer,
+            currentCanvas: currentCanvasReducer,
+        }),
+        StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
+        ReactiveFormsModule,
+        ApiModule.forRoot(() => new Configuration({ basePath: environment.apiUrl })),
+        EffectsModule.forRoot([CanvasListEffects, CurrentCanvasEffects])], providers: [
+        provideStore({
+            currentCanvas: currentCanvasReducer,
+            canvasList: canvasListReducer,
+        }),
+        provideStoreDevtools({
+            maxAge: 25,
+            logOnly: !isDevMode(),
+        }),
+        provideEffects([CanvasListEffects, CurrentCanvasEffects]),
+        provideHttpClient(withInterceptorsFromDi()),
+    ] })
 export class AppModule {}
