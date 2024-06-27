@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { of } from "rxjs";
-import { catchError, map, mergeMap } from "rxjs/operators";
+import { EMPTY, of } from "rxjs";
+import { catchError, map, mergeMap, switchMap, tap } from "rxjs/operators";
 import * as CanvasActions from "../actions/canvas-list.actions";
 import { Canvas, CanvasService } from "src/app/core/services/api-client";
 import { parseISO } from "date-fns";
@@ -54,6 +54,33 @@ export class CanvasListEffects {
         )
       )
     )
+  );
+
+  deleteCanvas$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(CanvasActions.deleteCanvas),
+        switchMap(({ id }) =>
+          this.canvasService.deleteCanvasApiCanvasCanvasIdDelete(id).pipe(
+            tap(() =>
+              this.toast.showToast({
+                severity: "success",
+                summary: "Success",
+                detail: "Canvas has been deleted.",
+              })
+            ),
+            catchError(_ => {
+              this.toast.showToast({
+                severity: "error",
+                summary: "Could not delete the canvas :(",
+                detail: "Please try again.",
+              });
+              return EMPTY;
+            })
+          )
+        )
+      ),
+    { dispatch: false }
   );
 
   constructor(

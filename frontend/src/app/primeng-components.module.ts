@@ -13,6 +13,7 @@ import { TableModule } from "primeng/table";
 import { ToastModule } from "primeng/toast";
 import { ProgressSpinnerModule } from "primeng/progressspinner";
 import { DialogModule } from "primeng/dialog";
+import { ConfirmPopupModule } from "primeng/confirmpopup";
 
 /**
  * A module which imports all required primeng components.
@@ -33,6 +34,7 @@ import { DialogModule } from "primeng/dialog";
     ToastModule,
     ProgressSpinnerModule,
     DialogModule,
+    ConfirmPopupModule,
   ],
   exports: [
     InputTextModule,
@@ -49,6 +51,7 @@ import { DialogModule } from "primeng/dialog";
     ToastModule,
     ProgressSpinnerModule,
     DialogModule,
+    ConfirmPopupModule,
   ],
 })
 export class PrimeNGComponentsModule {}

@@ -16,8 +16,8 @@ export const addCanvas = createAction(
   props<{ canvas: BasicBmcCanvasInfo }>()
 );
 
-export const removeCanvas = createAction(
-  "[canvas-list] removeCanvas",
+export const deleteCanvas = createAction(
+  "[canvas-list] deleteCanvas",
   props<{ id: string }>()
 );
 

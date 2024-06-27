@@ -65,6 +65,10 @@ export class PageOverviewComponent implements OnDestroy {
       });
   }
 
+  protected deleteCanvas(id: string) {
+    this.store.dispatch(CanvasListActions.deleteCanvas({ id }));
+  }
+
   ngOnDestroy() {
     this.destroy$.next(null);
     this.destroy$.complete();

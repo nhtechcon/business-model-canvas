@@ -22,7 +22,7 @@ export const canvasListReducer = createReducer(
     ...state,
     canvases: [...state.canvases, canvas],
   })),
-  on(CanvasActions.removeCanvas, (state, { id }) => ({
+  on(CanvasActions.deleteCanvas, (state, { id }) => ({
     ...state,
     canvases: state.canvases.filter(canvas => canvas.id !== id),
   })),

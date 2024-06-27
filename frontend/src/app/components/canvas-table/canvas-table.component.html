@@ -4,6 +4,7 @@
       <th>Name</th>
       <th>Creation Date</th>
       <th>Last Edited</th>
+      <th></th>
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-entry>
@@ -14,6 +15,14 @@
       <td>{{ entry.name }}</td>
       <td>{{ entry.creationDate | date: "dd/MM/yyyy HH:mm" }}</td>
       <td>{{ entry.lastEditDate | date: "dd/MM/yyyy HH:mm" }}</td>
+      <td>
+        <p-button
+          icon="pi pi-trash"
+          (click)="$event.stopImmediatePropagation(); confirmDelete($event, entry.id)"
+        ></p-button>
+      </td>
     </tr>
   </ng-template>
 </p-table>
+
+<p-confirmPopup />
