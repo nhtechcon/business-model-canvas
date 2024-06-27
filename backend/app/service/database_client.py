@@ -130,6 +130,22 @@ async def create_canvas(
         raise exc
 
 
+async def update_canvas_metadata(
+    db_session: AsyncSession, canvas_id: str, name: str
+) -> DB_BmcEntry:
+
+    result = await db_session.execute(select(DB_Canvas).filter_by(id=canvas_id))
+    canvas = result.scalar_one_or_none()
+
+    if canvas:
+        canvas.name = name
+        await db_session.commit()
+        await db_session.refresh(canvas)
+        return canvas
+    else:
+        raise ValueError("Entry not found")
+
+
 async def get_canvas_entries(
     db_session: AsyncSession, canvas_id: str
 ) -> list[DB_BmcEntry]:

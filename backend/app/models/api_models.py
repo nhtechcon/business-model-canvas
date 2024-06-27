@@ -67,6 +67,10 @@ class CreateCanvasRequest(ApiBaseModel):
     name: str
 
 
+class UpdateCanvasRequest(ApiBaseModel):
+    name: str
+
+
 class BmcEntry(ApiBaseModel):
     id: int
     text: str

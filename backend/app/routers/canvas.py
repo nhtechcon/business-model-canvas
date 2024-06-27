@@ -62,6 +62,28 @@ async def get_canvas(
     return canvas
 
 
+@router.put(
+    "/canvas/{canvas_id}",
+    response_model=api_models.Canvas,
+    tags=["canvas"],
+)
+async def put_canvas_update(
+    req: api_models.UpdateCanvasRequest,
+    canvas: db_models.DB_Canvas = Depends(can_user_access_canvas),
+    db_session: AsyncSession = Depends(get_db),
+):
+    """Returns the updated canvas metadata."""
+
+    if not canvas:
+        raise HTTPException(status_code=404, detail="Canvas not found")
+
+    canvas.name = req.name
+    await db_session.commit()
+    await db_session.refresh(canvas)
+
+    return canvas
+
+
 @router.get(
     "/canvas/{canvas_id}/entries",
     response_model=list[api_models.BmcEntry],
