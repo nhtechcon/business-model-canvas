@@ -28,6 +28,7 @@ import { environment } from "src/environments/environment";
 import { EffectsModule, provideEffects } from "@ngrx/effects";
 import { CanvasListEffects } from "./store/effects/canvas-list.effect";
 import { CurrentCanvasEffects } from "./store/effects/current-canvas.effect";
+import { CanvasTableComponent } from "./components/canvas-table/canvas-table.component";
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { CurrentCanvasEffects } from "./store/effects/current-canvas.effect";
     PageRegisterComponent,
     ToolbarComponent,
     LogoComponent,
+    CanvasTableComponent,
   ],
   imports: [
     BrowserModule,

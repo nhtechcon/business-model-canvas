@@ -51,25 +51,7 @@
               </div>
             </div>
 
-            <p-table [value]="canvasList" [tableStyle]="{ 'min-width': '50rem' }">
-              <ng-template pTemplate="header">
-                <tr>
-                  <th>Name</th>
-                  <th>Creation Date</th>
-                  <th>Last Edited</th>
-                </tr>
-              </ng-template>
-              <ng-template pTemplate="body" let-entry>
-                <tr
-                  class="cursor-pointer hover:bg-orange-50"
-                  [routerLink]="'/main/canvas/' + entry.id"
-                >
-                  <td>{{ entry.name }}</td>
-                  <td>{{ entry.creationDate | date: "dd/MM/yyyy HH:mm" }}</td>
-                  <td>{{ entry.lastEditDate | date: "dd/MM/yyyy HH:mm" }}</td>
-                </tr>
-              </ng-template>
-            </p-table>
+            <app-canvas-table [canvasList]="canvasList"></app-canvas-table>
           </div>
         </ng-container>
       </div>
