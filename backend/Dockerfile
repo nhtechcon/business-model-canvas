@@ -5,6 +5,9 @@ FROM python:3.12.4-alpine3.20
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
+# Add packages required for successful dependency installation
+RUN apk add gcc musl-dev libffi-dev
+
 # Set working directory
 WORKDIR /app
 
