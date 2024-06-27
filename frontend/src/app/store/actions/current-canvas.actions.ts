@@ -2,6 +2,11 @@ import { createAction, props } from "@ngrx/store";
 import { BmcEntry } from "src/app/core/models/bmc-entry.model";
 import { BmcCanvas } from "src/app/core/models/bmc-canvas.model";
 
+export const loadFullCanvas = createAction(
+  "[current-canvas] loadFullCanvas",
+  props<{ canvasId: string }>()
+);
+
 export const setCanvasData = createAction(
   "[current-canvas] setCanvasData",
   props<{ data: BmcCanvas }>()

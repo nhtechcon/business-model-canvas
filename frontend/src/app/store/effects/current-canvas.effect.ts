@@ -8,9 +8,41 @@ import { ToastService } from "src/app/core/services/toast.service";
 import { concatLatestFrom } from "@ngrx/operators";
 import { Store } from "@ngrx/store";
 import { selectCurrentCanvas } from "../selectors/current-canvas.selectors";
+import { parseISO } from "date-fns";
 
 @Injectable()
 export class CurrentCanvasEffects {
+  loadFullCanvas$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(CurrentCanvasActions.loadFullCanvas),
+      switchMap(({ canvasId }) =>
+        this.canvasService.getCanvasApiCanvasCanvasIdGet(canvasId).pipe(
+          map((response) => CurrentCanvasActions.setCanvasData({
+            data: {
+              id: response.id,
+              name: response.name,
+              creationDate: parseISO(response.creationDate),
+              lastEditDate: parseISO(response.lastEditDate),
+              entries: response.entries.map(entry => ({
+                ...entry,
+                date: parseISO(entry.date),
+                lastUpdated: parseISO(entry.lastUpdated),
+              })),
+            },
+          }))
+        )
+      ),
+      catchError(_ => {
+        this.toast.showToast({
+          severity: "error",
+          summary: "Oh no :/",
+          detail: "Could not load the requested canvas.",
+        });
+        return EMPTY;
+      })
+    )
+  );
+
   createEntry$ = createEffect(
     () =>
       this.actions$.pipe(
