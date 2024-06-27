@@ -9,6 +9,11 @@ import { LoadingState } from "../common";
  */
 export interface CurrentCanvasState extends BmcCanvas {
   loadingState: LoadingState;
+
+  /**
+   * The initial load reflects whether the initial canvas data has been
+   * fetched already. */
+  initialLoad: LoadingState;
 }
 
 export const initialState: CurrentCanvasState = {
@@ -18,6 +23,7 @@ export const initialState: CurrentCanvasState = {
   lastEditDate: new Date(),
   entries: [],
   loadingState: "init",
+  initialLoad: "init",
 };
 
 export const currentCanvasReducer = createReducer(
@@ -25,6 +31,7 @@ export const currentCanvasReducer = createReducer(
   on(CurrentCanvasActions.setCanvasData, (state, { data }) => ({
     ...JSON.parse(JSON.stringify(data)),
     loadingState: "ready",
+    initialLoad: "ready",
   })),
   on(CurrentCanvasActions.setCanvasName, (state, { name }) => ({
     ...state,
@@ -51,5 +58,9 @@ export const currentCanvasReducer = createReducer(
     entries: state.entries.map(entry =>
       entry.id === oldId ? { ...entry, id: newId } : entry
     ),
+  })),
+  on(CurrentCanvasActions.setInitialLoadState, (state, { value }) => ({
+    ...state,
+    initialLoad: value,
   }))
 );

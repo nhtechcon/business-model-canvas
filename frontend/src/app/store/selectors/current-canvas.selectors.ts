@@ -16,3 +16,8 @@ export const selectName = createSelector(
   selectCurrentCanvas,
   (state: CurrentCanvasState) => state.name
 );
+
+export const selectInitialLoad = createSelector(
+  selectCurrentCanvas,
+  (state: CurrentCanvasState) => state.initialLoad
+);

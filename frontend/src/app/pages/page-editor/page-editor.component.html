@@ -6,6 +6,29 @@
     <app-sidebar></app-sidebar>
   </aside>
   <div class="content">
-    <app-bmc-canvas></app-bmc-canvas>
+    <ng-container *ngIf="initialLoad$ | async as initialLoadingState">
+      <div
+        *ngIf="initialLoadingState !== 'ready'"
+        class="text-center h-full flex align-items-center justify-content-center"
+      >
+        <!-- Loader -->
+        <p-progressSpinner
+          *ngIf="initialLoadingState === 'init'"
+          styleClass="w-3rem h-3rem"
+          strokeWidth="4"
+          ariaLabel="loading"
+        />
+        <!-- Error -->
+        <ng-container *ngIf="initialLoadingState === 'failed'">
+          <div class="text-center">
+            <p>Oh no, we could not load your canvas :(</p>
+            <p-button size="small" (click)="loadCanvas()">Retry</p-button>
+          </div>
+        </ng-container>
+      </div>
+
+      <!-- Content -->
+      <app-bmc-canvas *ngIf="initialLoadingState === 'ready'"></app-bmc-canvas>
+    </ng-container>
   </div>
 </div>

@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { EMPTY } from "rxjs";
+import { EMPTY, of } from "rxjs";
 import { catchError, concatMap, map, switchMap, tap } from "rxjs/operators";
 import * as CurrentCanvasActions from "../actions/current-canvas.actions";
 import { CanvasService } from "src/app/core/services/api-client";
@@ -17,19 +17,21 @@ export class CurrentCanvasEffects {
       ofType(CurrentCanvasActions.loadFullCanvas),
       switchMap(({ canvasId }) =>
         this.canvasService.getCanvasApiCanvasCanvasIdGet(canvasId).pipe(
-          map((response) => CurrentCanvasActions.setCanvasData({
-            data: {
-              id: response.id,
-              name: response.name,
-              creationDate: parseISO(response.creationDate),
-              lastEditDate: parseISO(response.lastEditDate),
-              entries: response.entries.map(entry => ({
-                ...entry,
-                date: parseISO(entry.date),
-                lastUpdated: parseISO(entry.lastUpdated),
-              })),
-            },
-          }))
+          map(response =>
+            CurrentCanvasActions.setCanvasData({
+              data: {
+                id: response.id,
+                name: response.name,
+                creationDate: parseISO(response.creationDate),
+                lastEditDate: parseISO(response.lastEditDate),
+                entries: response.entries.map(entry => ({
+                  ...entry,
+                  date: parseISO(entry.date),
+                  lastUpdated: parseISO(entry.lastUpdated),
+                })),
+              },
+            })
+          )
         )
       ),
       catchError(_ => {
@@ -38,7 +40,9 @@ export class CurrentCanvasEffects {
           summary: "Oh no :/",
           detail: "Could not load the requested canvas.",
         });
-        return EMPTY;
+        return of(
+          CurrentCanvasActions.setInitialLoadState({ value: "failed" })
+        );
       })
     )
   );
