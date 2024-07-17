@@ -30,7 +30,8 @@ import { CanvasListEffects } from "./store/effects/canvas-list.effect";
 import { CurrentCanvasEffects } from "./store/effects/current-canvas.effect";
 import { CanvasTableComponent } from "./components/canvas-table/canvas-table.component";
 
-@NgModule({ declarations: [
+@NgModule({ 
+    declarations: [
         AppComponent,
         PageEditorComponent,
         PageLoginComponent,
@@ -40,7 +41,9 @@ import { CanvasTableComponent } from "./components/canvas-table/canvas-table.com
         LogoComponent,
         CanvasTableComponent,
     ],
-    bootstrap: [AppComponent], imports: [BrowserModule,
+    bootstrap: [AppComponent], 
+    imports: [
+        BrowserModule,
         BrowserAnimationsModule,
         TranslateModule.forRoot(),
         TranslateModule.forRoot({
@@ -62,7 +65,9 @@ import { CanvasTableComponent } from "./components/canvas-table/canvas-table.com
         StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
         ReactiveFormsModule,
         ApiModule.forRoot(() => new Configuration({ basePath: environment.apiUrl })),
-        EffectsModule.forRoot([CanvasListEffects, CurrentCanvasEffects])], providers: [
+        EffectsModule.forRoot([CanvasListEffects, CurrentCanvasEffects])
+    ],
+    providers: [
         provideStore({
             currentCanvas: currentCanvasReducer,
             canvasList: canvasListReducer,
@@ -73,5 +78,6 @@ import { CanvasTableComponent } from "./components/canvas-table/canvas-table.com
         }),
         provideEffects([CanvasListEffects, CurrentCanvasEffects]),
         provideHttpClient(withInterceptorsFromDi()),
-    ] })
+    ] 
+})
 export class AppModule {}
